@@ -1,9 +1,11 @@
 Makefile.PL
 MANIFEST
 README
+ChangeLog
 lib/Graph/Writer.pm
 lib/Graph/Writer/Dot.pm
 lib/Graph/Writer/XML.pm
 lib/Graph/Writer/VCG.pm
+lib/Graph/Writer/daVinci.pm
 lib/Graph/Reader.pm
 lib/Graph/Reader/XML.pm

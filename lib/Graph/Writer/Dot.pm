@@ -1,7 +1,7 @@
 #
 # Graph::Writer::Dot - write a directed graph out in Dot format
 #
-# $Id: Dot.pm,v 1.2 2001/02/08 18:46:12 neilb Exp $
+# $Id: Dot.pm,v 1.3 2001/03/12 13:59:13 neilb Exp $
 #
 package Graph::Writer::Dot;
 
@@ -9,7 +9,7 @@ use strict;
 
 use Graph::Writer;
 use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Graph::Writer);
 
 #-----------------------------------------------------------------------
@@ -24,7 +24,7 @@ my %valid_attributes =
 		 ordering ordering orientation page rank rankdir ranksep
 		 ratio size)],
     node  => [qw(color fontcolor fontname fontsize height width label
-		 layer shape shapefile style)],
+		 layer shape shapefile style URL)],
     edge  => [qw(color decorate dir fontcolor fontname fontsize id
 		 label layer minlen style weight)],
 );

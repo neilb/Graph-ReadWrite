@@ -1,6 +1,6 @@
 
 			Graph-ReadWrite
-			      1.00
+			      1.01
 
 This is a collection of perl classes for reading and writing
 directed graphs in a variety of file formats. There are two
@@ -21,11 +21,14 @@ A reader and writer are provided for this:
 	Graph::Reader::XML
 	Graph::Writer::XML
 
-Writers are also included for Dot and VCG, two freely available
-packages for displaying / rendering graphs.
+Writers are also included for Dot, VCG, and daVinci,
+two packages for displaying / rendering graphs.
+Dot and VCG are freely available; daVinci is freely available
+at the moment, but that is going to change soon.
 
 	Graph::Writer::Dot
 	Graph::Writer::VCG
+	Graph::Writer::daVinci
 
 Dependencies:
 	Graph		Jarkko's Graph classes

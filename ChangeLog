@@ -1,0 +1,19 @@
+
+			ChangeLog for Graph-ReadWrite
+
+1.01
+
+	Added support for URL attribute on nodes in Dot.
+
+	Added support for almost all attributes understood by VCG.
+
+	Added a rough cut at a Writer class for daVinci:
+		Graph::Writer::daVinci
+
+1.00 feb 2001 neilb
+
+	Initial release - has baseclass for Reader and Writer classes.
+
+	Reader and Writer for simple XML format.
+
+	Writers for Dot and VCG formats.
