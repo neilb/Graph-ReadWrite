@@ -1,6 +1,6 @@
 
 			Graph-ReadWrite
-			      1.06
+			      1.07
 
 This is a collection of perl classes for reading and writing
 directed graphs in a variety of file formats. The graphs are
@@ -46,8 +46,8 @@ with HTK, or tools which use the same format.
 
 Dependencies:
 	Graph		Jarkko's Graph classes
-	XML::Parser	if you use Graph::Reader::XML
-	XML::Writer	if you use Graph::Writer::XML
+	XML::Parser	used by Graph::Reader::XML
+	XML::Writer	used by Graph::Writer::XML
 	IO::File
 
 To install these modules, you should just have to run the following:

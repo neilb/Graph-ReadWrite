@@ -1,6 +1,12 @@
 
 			ChangeLog for Graph-ReadWrite
 
+1.06	2002-jul-09 neilb
+
+	Added XML::Parser and XML::Writer as dependencies in Makefile.PL.
+	This was prompted by looking at testers.cpan.org, which has
+	this distribution as failing.
+
 1.05	2002-mar-20 neilb
 
 	Graph::Writer::VCG - common attributes (label, color, and

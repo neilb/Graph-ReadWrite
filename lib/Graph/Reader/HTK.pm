@@ -1,7 +1,7 @@
 #
 # Graph::Reader::HTK - perl module for reading an HTK lattice into a Graph
 #
-# $Id: HTK.pm,v 1.2 2001/11/11 14:22:53 neilb Exp $
+# $Id: HTK.pm,v 1.3 2002/07/03 17:43:10 neilb Exp $
 #
 package Graph::Reader::HTK;
 
@@ -9,7 +9,7 @@ use Graph::Reader;
 use Carp;
 use vars qw(@ISA $VERSION);
 @ISA = qw(Graph::Reader);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 
 my %node_attributes =
 (
