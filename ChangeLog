@@ -1,6 +1,10 @@
 
 			ChangeLog for Graph-ReadWrite
 
+1.03
+
+	Added reader and writer classes for HTK lattice files.
+
 1.02
 	Fixed a bug in the XML writer module - the way it was using
 	XML::Writer caused STDOUT to be closed after you've written
