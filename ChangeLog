@@ -1,6 +1,19 @@
 
 			ChangeLog for Graph-ReadWrite
 
+1.02
+	Fixed a bug in the XML writer module - the way it was using
+	XML::Writer caused STDOUT to be closed after you've written
+	a graph. I consider it a bug in XML::Writer, but I was able
+	to change the way Graph::Writer::XML uses that module.
+
+	Basically it just means that we construct a new instance
+	of XML::Writer every time we write out a graph. For most
+	uses, this won't be a problem, but you'd notice a hit if
+	you were creating the writer and then writing a lot of graphs.
+
+	This was noticed by Mike Hayward <hayward@loup.net>
+
 1.01
 
 	Added support for URL attribute on nodes in Dot.

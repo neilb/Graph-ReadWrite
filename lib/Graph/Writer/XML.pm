@@ -1,7 +1,7 @@
 #
 # Graph::Writer::XML - write a directed graph out as XML
 #
-# $Id: XML.pm,v 1.2 2001/02/08 18:46:42 neilb Exp $
+# $Id: XML.pm,v 1.3 2001/03/18 14:10:17 neilb Exp $
 #
 package Graph::Writer::XML;
 
@@ -9,25 +9,9 @@ use Graph::Writer;
 use XML::Writer;
 
 use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Graph::Writer);
 
-#=======================================================================
-#
-# _init() - constructor initialisation method
-#
-# This is invoked from the constructor (new) in the base class.
-# We create an instance of XML::Writer, which we use to actually
-# generate the XML, since it handles escaping, and similar issues for us.
-#
-#=======================================================================
-sub _init
-{
-    my $self = shift;
-
-    $self->SUPER::_init();
-    $self->{XMLWRITER} = XML::Writer->new(DATA_MODE => 1, DATA_INDENT => 2);
-}
 
 #=======================================================================
 #
@@ -53,9 +37,12 @@ sub _write_graph
     my $from;
     my $to;
     my %attributes;
-    my $xmlwriter = $self->{XMLWRITER};
+    my $xmlwriter;
 
 
+    $xmlwriter = XML::Writer->new(OUTPUT      => $FILE,
+                                  DATA_MODE   => 1,
+                                  DATA_INDENT => 2);
     $xmlwriter->setOutput($FILE);
 
     $xmlwriter->startTag('graph');
