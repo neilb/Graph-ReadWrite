@@ -1,6 +1,6 @@
 
 			Graph-ReadWrite
-			      1.05
+			      1.06
 
 This is a collection of perl classes for reading and writing
 directed graphs in a variety of file formats. The graphs are

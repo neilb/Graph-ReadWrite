@@ -1,6 +1,12 @@
 
 			ChangeLog for Graph-ReadWrite
 
+1.05	2002-mar-20 neilb
+
+	Graph::Writer::VCG - common attributes (label, color, and
+	text color) weren't supported on edges.
+	Bug and fix reported by Alexandre Cherif.
+
 1.05	2002-jan-20 neilb
 
 	Added a basic test-suite.

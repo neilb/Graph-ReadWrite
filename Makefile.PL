@@ -1,7 +1,7 @@
 #
 # Makefile.PL for Graph-ReadWrite
 #
-# $Id: Makefile.PL,v 1.3 2002/01/13 13:25:36 neilb Exp $
+# $Id: Makefile.PL,v 1.4 2002/03/20 09:22:08 neilb Exp $
 #
 
 use ExtUtils::MakeMaker;
@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker;
 &WriteMakefile(
                 NAME         => 'Graph-ReadWrite',
                 DISTNAME     => 'Graph-ReadWrite',
-		VERSION      => '1.05',
+		VERSION      => '1.06',
                 PREREQ_PM    => {
                                  'IO::File'   => 0,
                                  'Graph'      => 0,
