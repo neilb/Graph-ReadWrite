@@ -12,3 +12,11 @@ lib/Graph/Reader.pm
 lib/Graph/Reader/XML.pm
 lib/Graph/Reader/HTK.pm
 lib/Graph/Reader/Dot.pm
+t/base.t
+t/simple.t
+t/reader.t
+t/data/simple.davinci
+t/data/simple.xml
+t/data/simple.dot
+t/data/simple.htk
+t/data/simple.vcg

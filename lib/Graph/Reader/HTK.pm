@@ -78,7 +78,7 @@ sub _read_graph
 
 	if (/^\s*(base|lmname|lmscale|wdpenalty)\s*=\s*(\S+)/)
 	{
-	    print STDERR "Setting graph attribute $1 to $2\n";
+	    # print STDERR "Setting graph attribute $1 to $2\n";
 	    $graph->set_attribute($1, ''.$2);
 	}
 
@@ -103,7 +103,7 @@ sub _read_graph
 	    #---------------------------------------------------------------
 	    $node_num = "n$1";
 	    $graph->add_vertex($node_num);
-	    print STDERR "Node $node_num:\n";
+	    # print STDERR "Node $node_num:\n";
 	    while (/\s*(\S+)\s*=\s*(\S+)/mg)
 	    {
 		$an = $1;
@@ -112,7 +112,7 @@ sub _read_graph
 		{
 		    foreach my $a (@{ $node_attributes{$an} })
 		    {
-			print STDERR "   attr $a = $av\n";
+			# print STDERR "   attr $a = $av\n";
 			$graph->set_attribute($a, $node_num, $av);
 		    }
 		} else {
@@ -135,12 +135,12 @@ sub _read_graph
 	    my %attr;
 
 	    $link = $1;
-	    print STDERR "Edge $link:\n";
+	    # print STDERR "Edge $link:\n";
 	    while (/\s*(\S+)\s*=\s*(\S+)/mg)
 	    {
 		$an = $1;
 		$av = $2;
-		print STDERR "   field $an = $av\n";
+		# print STDERR "   field $an = $av\n";
 		if (exists $edge_attributes{$an})
 		{
 		    foreach my $a (@{ $edge_attributes{$an} })
@@ -164,7 +164,7 @@ sub _read_graph
 	    $graph->add_edge($from, $to);
 	    foreach $a (keys %attr)
 	    {
-		print STDERR "     attr $a = ", $attr{$a}, "\n";
+		# print STDERR "     attr $a = ", $attr{$a}, "\n";
 		$graph->set_attribute($a, $from, $to, $attr{$a});
 	    }
 	}

@@ -1,6 +1,12 @@
 
 			ChangeLog for Graph-ReadWrite
 
+1.05	2002-jan-20 neilb
+
+	Added a basic test-suite.
+
+	Commented out debugging output in the HTK Writer. Sorry Phil!
+
 1.04	2001-nov-11 neilb
 
 	Added Graph::Reader::Dot, a reader for the Dot format

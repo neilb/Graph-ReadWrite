@@ -1,6 +1,6 @@
 
 			Graph-ReadWrite
-			      1.04
+			      1.05
 
 This is a collection of perl classes for reading and writing
 directed graphs in a variety of file formats. The graphs are
@@ -50,7 +50,16 @@ Dependencies:
 	XML::Writer	if you use Graph::Writer::XML
 	IO::File
 
+To install these modules, you should just have to run the following:
+
+	% perl Makefile.PL
+	% make
+	% make test
+	% make install
+
+This distribution contains an early version of a test-suite;
+you may get a warning about an undefined value from one of the tests.
+
 Bugs, suggestions, and new readers and writers will be gratefully received.
 
 Neil Bowers <neil@bowers.com>
-http://www.cre.canon.co.uk/
