@@ -1,10 +1,12 @@
 
 			Graph-ReadWrite
-			      1.03
+			      1.04
 
 This is a collection of perl classes for reading and writing
-directed graphs in a variety of file formats. There are two
-base classes:
+directed graphs in a variety of file formats. The graphs are
+represented in Perl using Jarkko Hietaniemi's Graph classes.
+
+There are two base classes:
 
 	Graph::Reader
 	Base class for classes which read a graph
@@ -30,13 +32,17 @@ at the moment, but that is going to change soon.
 	Graph::Writer::VCG
 	Graph::Writer::daVinci
 
+A reader for Dot files has been contributed by Mark Hillebrand:
+
+	Graph::Reader::Dot
+
 A reader and writer for HTK lattices are also included:
 
 	Graph::Reader::HTK
 	Graph::Writer::HTK
 
-These will probably only be of interest to people working with HTK,
-or tools which use the same format.
+These last two will probably only be of interest to people working
+with HTK, or tools which use the same format.
 
 Dependencies:
 	Graph		Jarkko's Graph classes
@@ -46,6 +52,5 @@ Dependencies:
 
 Bugs, suggestions, and new readers and writers will be gratefully received.
 
-Neil Bowers <neilb@cre.canon.co.uk>
-Canon Research Centre Europe Ltd.
+Neil Bowers <neil@bowers.com>
 http://www.cre.canon.co.uk/

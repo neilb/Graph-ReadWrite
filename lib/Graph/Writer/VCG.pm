@@ -1,7 +1,7 @@
 #
 # Graph::Writer::VCG - write a directed graph out in VCG format
 #
-# $Id: VCG.pm,v 1.3 2001/03/12 14:06:33 neilb Exp $
+# $Id: VCG.pm,v 1.2 2001/11/11 14:24:37 neilb Exp $
 #
 package Graph::Writer::VCG;
 
@@ -9,7 +9,7 @@ use strict;
 
 use Graph::Writer;
 use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Graph::Writer);
 
 #-----------------------------------------------------------------------
@@ -370,10 +370,11 @@ The base-class for Graph::Writer::VCG
 
 =head1 AUTHOR
 
-Neil Bowers E<lt>neilb@cre.canon.co.ukE<gt>
+Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
+Copyright (c) 2001, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

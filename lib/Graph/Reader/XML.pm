@@ -1,7 +1,7 @@
 #
 # Graph::Reader::XML - perl class for reading directed graphs from XML
 #
-# $Id: XML.pm,v 1.3 2001/02/08 18:47:21 neilb Exp $
+# $Id: XML.pm,v 1.3 2001/11/11 14:22:53 neilb Exp $
 #
 package Graph::Reader::XML;
 
@@ -147,7 +147,7 @@ sub set_attribute
     }
 
     my $graph = $self->{GRAPH};
-    my ($el, @args) = @{ pop(@{$self->{CONTEXT}}) };
+    my ($el, @args) = @{ (@{$self->{CONTEXT}})[-1] };
 
     if ($el eq 'node')
     {
@@ -238,10 +238,11 @@ Jarkko Hietaniemi's classes for representing directed graphs.
 
 =head1 AUTHOR
 
-Neil Bowers E<lt>neilb@cre.canon.co.ukE<gt>
+Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
+Copyright (c) 2001, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify

@@ -1,7 +1,7 @@
 #
 # Graph::Writer::daVinci - write a directed graph out in daVinci format
 #
-# $Id: daVinci.pm,v 1.1 2001/03/12 13:28:37 neilb Exp $
+# $Id: daVinci.pm,v 1.2 2001/11/11 14:24:38 neilb Exp $
 #
 package Graph::Writer::daVinci;
 
@@ -9,7 +9,7 @@ use strict;
 
 use Graph::Writer;
 use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.1 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Graph::Writer);
 
 #-----------------------------------------------------------------------
@@ -233,10 +233,11 @@ The base-class for Graph::Writer::daVinci
 
 =head1 AUTHOR
 
-Neil Bowers E<lt>neilb@cre.canon.co.ukE<gt>
+Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
+Copyright (c) 2001, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

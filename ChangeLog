@@ -1,6 +1,17 @@
 
 			ChangeLog for Graph-ReadWrite
 
+1.04	2001-nov-11 neilb
+
+	Added Graph::Reader::Dot, a reader for the Dot format
+	contributed by Mark Hillebrand.
+
+	Fixed a bug in Graph::Reader::XML, found by Mark Hillebrand.
+	The reader would only cope with a single <attribute> element
+	inside each graph, node or edge element.
+
+	Changed contact email address to neil@bowers.com
+
 1.03
 
 	Added reader and writer classes for HTK lattice files.
