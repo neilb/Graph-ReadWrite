@@ -1,7 +1,7 @@
 #
 # Graph::Reader::HTK - perl module for reading an HTK lattice into a Graph
 #
-# $Id: HTK.pm,v 1.3 2002/07/03 17:43:10 neilb Exp $
+# $Id: HTK.pm,v 1.3 2005/01/02 19:03:14 neilb Exp $
 #
 package Graph::Reader::HTK;
 
@@ -72,14 +72,14 @@ sub _read_graph
 	# ignore version line
 	#---------------------------------------------------------------
 	if (/^\s*(V|VERSION)\s*=\s*(\S+)/) {
-	    $graph->set_attribute('HTK_VERSION', $2);
+	    $graph->set_graph_attribute('HTK_VERSION', $2);
 	    next;
 	}
 
 	if (/^\s*(base|lmname|lmscale|wdpenalty)\s*=\s*(\S+)/)
 	{
 	    # print STDERR "Setting graph attribute $1 to $2\n";
-	    $graph->set_attribute($1, ''.$2);
+	    $graph->set_graph_attribute($1, ''.$2);
 	}
 
 	#---------------------------------------------------------------
@@ -113,7 +113,7 @@ sub _read_graph
 		    foreach my $a (@{ $node_attributes{$an} })
 		    {
 			# print STDERR "   attr $a = $av\n";
-			$graph->set_attribute($a, $node_num, $av);
+			$graph->set_vertex_attribute($node_num, $a, $av);
 		    }
 		} else {
 		    carp "unknown node field \"$an\" - ignoring\n";
@@ -165,7 +165,7 @@ sub _read_graph
 	    foreach $a (keys %attr)
 	    {
 		# print STDERR "     attr $a = ", $attr{$a}, "\n";
-		$graph->set_attribute($a, $from, $to, $attr{$a});
+		$graph->set_edge_attribute($from, $to, $a, $attr{$a});
 	    }
 	}
 	elsif (/^J/)
@@ -223,7 +223,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2000, Neil Bowers. All rights reserved.
+Copyright (c) 2000-2005, Neil Bowers. All rights reserved.
 Copyright (c) 2000, Canon Research Centre Europe. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify

@@ -1,7 +1,7 @@
 #
 # Graph::Writer::HTK - perl module for writing a Graph as an HTK lattice
 #
-# $Id: HTK.pm,v 1.2 2001/11/11 14:24:37 neilb Exp $
+# $Id: HTK.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
 #
 package Graph::Writer::HTK;
 
@@ -11,7 +11,7 @@ package Graph::Writer::HTK;
 use Graph::Writer;
 use vars qw(@ISA $VERSION);
 @ISA = qw(Graph::Writer);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 
 my @graph_attributes = qw(base lmname lmscale wdpenalty);
 
@@ -60,7 +60,7 @@ sub _write_graph
     print $FILE "N=",int($graph->vertices),"  L=",int($graph->edges),"\n";
 
     $node_num = 0;
-    foreach $v ($graph->vertices)
+    foreach $v (sort $graph->vertices)
     {
 	$v2n{$v} = $node_num;
 	print $FILE "I=$node_num";
@@ -68,9 +68,9 @@ sub _write_graph
 	{
 	    foreach my $attr (@{ $node_attributes{$field} })
 	    {
-		if ($graph->has_attribute($attr, $v))
+		if ($graph->has_vertex_attribute($v, $attr))
 		{
-		    print $FILE "  $field=", $graph->get_attribute($attr, $v);
+		    print $FILE "  $field=", $graph->get_vertex_attribute($v, $attr);
 		    last;
 		}
 	    }
@@ -80,19 +80,18 @@ sub _write_graph
     }
 
     $edge_num = 0;
-    my @edges = $graph->edges;
-    while (@edges > 0)
+    foreach my $edge (sort _by_vertex $graph->edges)
     {
-	($from, $to) = splice(@edges, 0, 2);
+	($from, $to) = @$edge;
 	print $FILE "J=$edge_num  S=", $v2n{$from}, "  E=", $v2n{$to};
 	foreach my $field (keys %edge_attributes)
 	{
 	    foreach my $attr (@{ $edge_attributes{$field} })
 	    {
-		if ($graph->has_attribute($attr, $from, $to))
+		if ($graph->has_edge_attribute($from, $to, $attr))
 		{
 		    print $FILE "  $field=",
-				$graph->get_attribute($attr, $from, $to);
+				$graph->get_vertex_attribute($from, $to, $attr);
 		    last;
 		}
 	    }
@@ -104,13 +103,20 @@ sub _write_graph
     return 1;
 }
 
+
+sub _by_vertex
+{
+    return $a->[0].$a->[1] cmp $b->[0].$b->[1];
+}
+
+
 1;
 
 __END__
 
 =head1 NAME
 
-Graph::Writer::HTK - write an perl Graph out as an HTK lattice file
+Graph::Writer::HTK - write a perl Graph out as an HTK lattice file
 
 =head1 SYNOPSIS
 
@@ -149,7 +155,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2000, Neil Bowers. All rights reserved.
+Copyright (c) 2000-2005, Neil Bowers. All rights reserved.
 Copyright (c) 2000, Canon Research Centre Europe. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify

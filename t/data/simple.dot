@@ -2,18 +2,18 @@ digraph g
 {
 
   /* list of nodes */
-  a;
-  b;
-  c;
-  d;
-  e;
+  "a";
+  "b";
+  "c";
+  "d";
+  "e";
 
   /* list of edges */
-  a -> b;
-  a -> c;
-  b -> c;
-  b -> d;
-  c -> d;
-  c -> e;
-  e -> e;
+  "a" -> "b";
+  "a" -> "c";
+  "b" -> "c";
+  "b" -> "d";
+  "c" -> "d";
+  "c" -> "e";
+  "e" -> "e";
 }

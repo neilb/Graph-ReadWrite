@@ -1,7 +1,7 @@
 #
 # Graph::Writer::XML - write a directed graph out as XML
 #
-# $Id: XML.pm,v 1.2 2001/11/11 14:24:37 neilb Exp $
+# $Id: XML.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
 #
 package Graph::Writer::XML;
 
@@ -9,7 +9,7 @@ use Graph::Writer;
 use XML::Writer;
 
 use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Graph::Writer);
 
 
@@ -36,7 +36,7 @@ sub _write_graph
     my $v;
     my $from;
     my $to;
-    my %attributes;
+    my $aref;
     my $xmlwriter;
 
 
@@ -50,30 +50,30 @@ sub _write_graph
     #-------------------------------------------------------------------
     # dump out attributes of the graph, if it has any
     #-------------------------------------------------------------------
-    %attributes = $graph->get_attributes();
-    foreach my $attr (keys %attributes)
+    $aref = $graph->get_graph_attributes();
+    foreach my $attr (keys %{ $aref })
     {
 	$xmlwriter->emptyTag('attribute', 
 				'name' => $attr,
-				'value' => $attributes{$attr});
+				'value' => $aref->{$attr});
     }
 
     #-------------------------------------------------------------------
     # dump out vertices of the graph, including any attributes
     #-------------------------------------------------------------------
-    foreach $v ($graph->vertices)
+    foreach $v (sort $graph->vertices)
     {
-	%attributes = $graph->get_attributes($v);
+	$aref = $graph->get_vertex_attributes($v);
 
-	if (keys %attributes > 0)
+	if (keys(%{ $aref }) > 0)
 	{
 	    $xmlwriter->startTag('node', 'id' => $v);
 
-	    foreach my $attr (keys %attributes)
+	    foreach my $attr (keys %{ $aref })
 	    {
 		$xmlwriter->emptyTag('attribute', 
 					'name' => $attr,
-					'value' => $attributes{$attr});
+					'value' => $aref->{$attr});
 	    }
 
 	    $xmlwriter->endTag('node');
@@ -87,20 +87,19 @@ sub _write_graph
     #-------------------------------------------------------------------
     # dump out edges of the graph, including any attributes
     #-------------------------------------------------------------------
-    my @edges = $graph->edges;
-    while (@edges > 0)
+    foreach my $edge (sort _by_vertex $graph->edges)
     {
-	($from, $to) = splice(@edges, 0, 2);
-	%attributes = $graph->get_attributes($from, $to);
-	if (keys %attributes > 0)
+	($from, $to) = @$edge;
+	$aref = $graph->get_edge_attributes($from, $to);
+	if (keys(%{ $aref }) > 0)
 	{
 	    $xmlwriter->startTag('edge', 'from' => $from, 'to' => $to);
 
-	    foreach my $attr (keys %attributes)
+	    foreach my $attr (keys %{ $aref })
 	    {
 		$xmlwriter->emptyTag('attribute', 
 					'name' => $attr,
-					'value' => $attributes{$attr});
+					'value' => $aref->{$attr});
 	    }
 
 	    $xmlwriter->endTag('edge');
@@ -115,6 +114,11 @@ sub _write_graph
     $xmlwriter->end();
 
     return 1;
+}
+
+sub _by_vertex
+{
+    return $a->[0].$a->[1] cmp $b->[0].$b->[1];
 }
 
 1;
@@ -170,8 +174,6 @@ or a filehandle for a previously opened file.
 
 =head1 KNOWN BUGS
 
-No attempt is made to validate the XML in any formal way.
-
 Attribute values must be scalar. If they're not, well,
 you're on your own.
 
@@ -206,7 +208,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

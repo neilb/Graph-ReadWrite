@@ -1,7 +1,7 @@
 #
 # Graph::Writer::daVinci - write a directed graph out in daVinci format
 #
-# $Id: daVinci.pm,v 1.2 2001/11/11 14:24:38 neilb Exp $
+# $Id: daVinci.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
 #
 package Graph::Writer::daVinci;
 
@@ -9,7 +9,7 @@ use strict;
 
 use Graph::Writer;
 use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.2 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Graph::Writer);
 
 #-----------------------------------------------------------------------
@@ -46,14 +46,14 @@ sub _write_graph
     my $from;
     my $to;
     my $gn;
-    my %attributes;
+    my $aref;
     my @keys;
-    my @nodes;
+    my (@nodes, @edges);
     my %done = ();
     my $node;
 
 
-    @nodes = $graph->source_vertices;
+    @nodes = sort $graph->source_vertices;
     if (@nodes == 0)
     {
 	die "expecting source vertices!\n";
@@ -74,22 +74,29 @@ sub _write_graph
     # Generate a list of edges, along with any attributes
     #-------------------------------------------------------------------
     print $FILE "\n  /* list of edges */\n";
-    my @edges = $graph->edges;
-    while (@edges > 0)
+    @edges = sort _by_vertex $graph->edges;
+    for (my $i = 0; $i < @edges; $i++)
     {
-	($from, $to) = splice(@edges, 0, 2);
+	($from, $to) = @{ $edges[$i] };
 	print $FILE "  $from -> $to";
-	%attributes = $graph->get_attributes($from, $to);
-	@keys = grep(exists $attributes{$_}, @{$valid_attributes{'edge'}});
+	$aref = $graph->get_graph_attributes($from, $to);
+	@keys = grep(exists $aref->{$_}, @{$valid_attributes{'edge'}});
 	if (@keys > 0)
 	{
-	    print $FILE " [", join(',', map { "$_ = \"$attributes{$_}\"" } @keys), "]";
+	    print $FILE " [", join(',', map { "$_ = \"".$aref->{$_}."\"" } @keys), "]";
 	}
-	print $FILE ", " if @edges > 0;
+	print $FILE ", " if $i < @edges - 1;
     }
 
     return 1;
 }
+
+
+sub _by_vertex
+{
+    return $a->[0].$a->[1] cmp $b->[0].$b->[1];
+}
+
 
 #=======================================================================
 #
@@ -103,7 +110,7 @@ sub _write_graph
 sub _dump_node
 {
     my    ($self, $graph, $FILE, $node, $doneref, $depth) = @_;
-    my    %attributes;
+    my    $aref;
     my    @keys;
     my    @children;
     my    $child;
@@ -117,11 +124,11 @@ sub _dump_node
     else
     {
 	print $FILE ' ' x (2 * $depth), "l(\"Node $node\", n(\"\"";
-	%attributes = $graph->get_attributes($node);
-	@keys = grep(exists $attributes{$_}, @{$valid_attributes{'node'}});
+	$aref = $graph->get_vertex_attributes($node);
+	@keys = grep(exists $aref->{$_}, @{$valid_attributes{'node'}});
 	if (@keys > 0)
 	{
-	    print $FILE ", [", join(', ', map { "a(\"$_\", \"$attributes{$_}\")" } @keys), "]";
+	    print $FILE ", [", join(', ', map { "a(\"$_\", \"".$aref->{$_}."\")" } @keys), "]";
 	}
 	else
 	{
@@ -144,11 +151,11 @@ sub _dump_node
 		print $FILE ' ' x (2 * $depth + 2), "l(\"Edge ${node}->$child\", e(\"\", [";
 
 		# write out any attributes of the edge
-		%attributes = $graph->get_attributes($node, $child);
-		@keys = grep(exists $attributes{$_}, @{$valid_attributes{'edge'}});
+		$aref = $graph->get_edge_attributes($node, $child);
+		@keys = grep(exists $aref->{$_}, @{$valid_attributes{'edge'}});
 		if (@keys > 0)
 		{
-		    print $FILE join(', ', map { "a(\"$_\", \"$attributes{$_}\")" } @keys);
+		    print $FILE join(', ', map { "a(\"$_\", \"".$aref->{$_}."\")" } @keys);
 		}
 
 		print $FILE "],\n";
@@ -237,7 +244,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

@@ -61,6 +61,7 @@ if (defined($reader) && defined($writer)
 } else {
     print "not ok 2\n";
 }
+unlink($genfile);
 
 #-----------------------------------------------------------------------
 # Dot

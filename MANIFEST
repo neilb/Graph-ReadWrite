@@ -1,6 +1,7 @@
 Makefile.PL
 MANIFEST
 README
+TODO
 ChangeLog
 lib/Graph/Writer.pm
 lib/Graph/Writer/Dot.pm
@@ -20,3 +21,4 @@ t/data/simple.xml
 t/data/simple.dot
 t/data/simple.htk
 t/data/simple.vcg
+META.yml                                 Module meta-data (added by MakeMaker)

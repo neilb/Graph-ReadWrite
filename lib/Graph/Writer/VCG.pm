@@ -1,7 +1,7 @@
 #
 # Graph::Writer::VCG - write a directed graph out in VCG format
 #
-# $Id: VCG.pm,v 1.3 2002/03/20 09:21:34 neilb Exp $
+# $Id: VCG.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
 #
 package Graph::Writer::VCG;
 
@@ -189,7 +189,7 @@ sub _write_graph
     my $v;
     my $from;
     my $to;
-    my %attributes;
+    my $aref;
     my @keys;
 
 
@@ -200,17 +200,17 @@ sub _write_graph
     #-------------------------------------------------------------------
     # Dump out any overall attributes of the graph
     #-------------------------------------------------------------------
-    %attributes = $graph->get_attributes();
-    _render_attributes('graph', \%attributes, $FILE);
+    $aref = $graph->get_graph_attributes();
+    _render_attributes('graph', $aref, $FILE);
 
     #-------------------------------------------------------------------
     # Dump out a list of the nodes, along with any defined attributes
     #-------------------------------------------------------------------
-    foreach $v ($graph->vertices)
+    foreach $v (sort $graph->vertices)
     {
 	print $FILE "  node: { title: \"$v\"";
-	%attributes = $graph->get_attributes($v);
-	_render_attributes('node', \%attributes, $FILE, 1);
+	$aref = $graph->get_vertex_attributes($v);
+	_render_attributes('node', $aref, $FILE, 1);
         print $FILE "  }\n";
     }
     print $FILE "\n";
@@ -218,13 +218,12 @@ sub _write_graph
     #-------------------------------------------------------------------
     # Dump out a list of the edges, along with any defined attributes
     #-------------------------------------------------------------------
-    my @edges = $graph->edges;
-    while (@edges > 0)
+    foreach my $edge (sort _by_vertex $graph->edges)
     {
-	($from, $to) = splice(@edges, 0, 2);
+	($from, $to) = @$edge;
 	print $FILE "  edge: { sourcename: \"$from\" targetname: \"$to\"";
-	%attributes = $graph->get_attributes($from, $to);
-	_render_attributes('edge', \%attributes, $FILE, 1);
+	$aref = $graph->get_edge_attributes($from, $to);
+	_render_attributes('edge', $aref, $FILE, 1);
         print $FILE "  }\n";
     }
 
@@ -232,6 +231,13 @@ sub _write_graph
 
     return 1;
 }
+
+
+sub _by_vertex
+{
+    return $a->[0].$a->[1] cmp $b->[0].$b->[1];
+}
+
 
 #=======================================================================
 #
@@ -376,7 +382,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

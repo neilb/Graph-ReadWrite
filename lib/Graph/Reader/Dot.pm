@@ -192,6 +192,7 @@ sub _CheckParams {
 	my($mandatory,$checklist,$inarray,$outhash)=@_;
 	my($prm,$value);
 	my($prmlst)={};
+	local $_;
 
 	while(($prm,$value)=splice(@$inarray,0,2)) {
         $prm=uc($prm);
@@ -220,6 +221,7 @@ sub _DBLoad {
 		and	return;
 	}
 	my($fname)=__FILE__;
+	local $_;
 	my(@drv);
 	open(DRV,"<$fname") or die "Report this as a BUG: Cannot open $fname";
 	while(<DRV>) {
@@ -990,9 +992,9 @@ sub
 		my $g = $_[0]->{GRAPH};
 		for my $attr (keys %{$r}) {
 			my $value = $r->{$attr};
-			$g->set_attribute($attr,$value);
+			$g->set_graph_attribute($attr,$value);
 		}
-		$g->set_attribute('name', $_[2] ); 	# set name, will be reused by Graph::Writer::Dot
+		$g->set_graph_attribute('name', $_[2] ); 	# set name, will be reused by Graph::Writer::Dot
 	}
 	],
 	[#Rule 2
@@ -1070,7 +1072,7 @@ sub
 #line 73 "Graph_Reader_Dot.yp"
 {
 		for my $k ( keys %{$_[2]} ) {	# merge the hashes
-			%{$_[1]}->{$k}++;
+			$_[1]->{$k}++;
 		}
 		return $_[1];
 	}
@@ -1169,7 +1171,7 @@ sub
 {
 		my $g = $_[0]->{GRAPH};
 		for my $u (keys %{$_[1]}) {
-			for my $v (keys %{@{$_[3]}->[0]} ) {
+			for my $v (keys %{ @{$_[3]}[0] } ) {
 				# add non-existent nodes...	(should make a separate loop for efficiency)
 				if( $_[0]->YYData->{Options}->{UseNodeAttr} ) {
 					unless ( $g->has_vertex($u) ) {
@@ -1366,9 +1368,17 @@ sub _merge_hash {
 sub _set_attribute_hash {
 	my $g = shift;
 	my $h = shift;
+	local $_;
+
 	# @_ contains the destination... (graph, node, edge)
 	for (keys %$h ) {
-		$g->set_attribute($_,@_,$h->{$_});
+		if (@_ == 0) {
+			$g->set_graph_attribute(@_,$_,$h->{$_});
+		} elsif (@_ == 1) {
+			$g->set_vertex_attribute(@_,$_,$h->{$_});
+		} else {
+			$g->set_edge_attribute(@_,$_,$h->{$_});
+		}
 	}
 }
 
@@ -1427,7 +1437,7 @@ sub _Lexer {
 use Graph::Reader;
 use vars qw(@ISA $VERSION $UseNodeAttr $UseEdgeAttr);
 
-$VERSION = sprintf("%d.%02d", q$Revision: 1.1 $ =~ /(\d+)\.(\d+)/);
+$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
 @ISA = qw(Parse::Yapp::Driver Graph::Reader);	# this will override setting from yapp
 
 sub _init {
@@ -1452,6 +1462,10 @@ sub _read_graph {
 	$self->YYData->{Options}->{Carp} = \&Carp::carp;
 	$self->YYData->{Options}->{Croak} = \&Carp::croak;
 	# ^ now that's a workaround for not being able to declare Carp early enough, coz of Yapp restrictions...
+
+	# the following kills a warning from the test regression suite:
+	$self->YYData->{INPUT} = '' unless defined $self->YYData->{INPUT};
+
 	$self->YYParse( yylex => \&_Lexer, yyerror => \&_Error );
 
     return 1;
