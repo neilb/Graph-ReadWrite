@@ -1,0 +1,40 @@
+
+			Graph-ReadWrite
+			      1.00
+
+This is a collection of perl classes for reading and writing
+directed graphs in a variety of file formats. There are two
+base classes:
+
+	Graph::Reader
+	Base class for classes which read a graph
+	file and create an instance of the Graph class.
+
+	Graph::Writer
+	Base class for classes which take an instance of the
+	Graph class and write it out in a specific file format.
+
+This distribution also defines a simple XML format for storing
+directed graphs, defined to meet the needs of the Graph class.
+A reader and writer are provided for this:
+
+	Graph::Reader::XML
+	Graph::Writer::XML
+
+Writers are also included for Dot and VCG, two freely available
+packages for displaying / rendering graphs.
+
+	Graph::Writer::Dot
+	Graph::Writer::VCG
+
+Dependencies:
+	Graph		Jarkko's Graph classes
+	XML::Parser	if you use Graph::Reader::XML
+	XML::Writer	if you use Graph::Writer::XML
+	IO::File
+
+Bugs, suggestions, and new readers and writers will be gratefully received.
+
+Neil Bowers <neilb@cre.canon.co.uk>
+Canon Research Centre Europe Ltd.
+http://www.cre.canon.co.uk/

@@ -1,0 +1,9 @@
+Makefile.PL
+MANIFEST
+README
+lib/Graph/Writer.pm
+lib/Graph/Writer/Dot.pm
+lib/Graph/Writer/XML.pm
+lib/Graph/Writer/VCG.pm
+lib/Graph/Reader.pm
+lib/Graph/Reader/XML.pm
