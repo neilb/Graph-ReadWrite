@@ -1,5 +1,11 @@
 Revision history for perl distribution Graph-ReadWrite
 
+2.02 2012-02-12
+
+    - Pulled out the Parse::Yapp::Driver code that was embedded in the
+      Dot reader. PAUSE didn't like me uploading code for a module I
+      don't have permission for. Now added as a pre-req.
+
 2.01 2012-02-12
 
     - Fixed RT bug #39792: trying to call method set_graph_attribute()

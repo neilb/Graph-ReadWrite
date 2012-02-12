@@ -8,12 +8,13 @@ use ExtUtils::MakeMaker;
 &WriteMakefile(
                 NAME         => 'Graph-ReadWrite',
                 DISTNAME     => 'Graph-ReadWrite',
-                VERSION      => '2.01',
+                VERSION      => '2.02',
                 PREREQ_PM    => {
-                                 'IO::File'     => 0,
-                                 'Graph'        => 0.5,
-                                 'XML::Parser'  => 0,
-                                 'XML::Writer'  => 0,
+                                 'IO::File'            => 0,
+                                 'Graph'               => 0.5,
+                                 'XML::Parser'         => 0,
+                                 'XML::Writer'         => 0,
+                                 'Parse::Yapp::Driver' => 0,
                                 },
                 dist         => {COMPRESS => 'gzip', SUFFIX => 'gz'},
               );

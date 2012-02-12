@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.01';
+our $VERSION = '2.02';
 
 #-----------------------------------------------------------------------
 # Attribute type information

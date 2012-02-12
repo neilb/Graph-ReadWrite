@@ -9,7 +9,7 @@ use warnings;
 use parent 'Graph::Reader';
 use Carp;
 
-our $VERSION = '2.01';
+our $VERSION = '2.02';
 
 my %node_attributes =
 (
@@ -233,7 +233,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2000-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2000-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2000, Canon Research Centre Europe. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify

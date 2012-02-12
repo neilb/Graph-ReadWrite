@@ -9,7 +9,7 @@ use warnings;
 use parent 'Graph::Writer';
 use XML::Writer;
 
-our $VERSION = '2.01';
+our $VERSION = '2.02';
 
 
 #=======================================================================
@@ -207,7 +207,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify
