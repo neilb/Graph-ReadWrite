@@ -1,7 +1,11 @@
+Revision history for perl distribution Graph-ReadWrite
 
-			ChangeLog for Graph-ReadWrite
+2.01 2012-02-12
 
-2.00	2005-jan-02 neilb
+    - renamed ChangeLog to Changes and reformatted as per CPAN::Changes::Spec
+
+2.00 2005-01-02
+
 	- made the changes needed to work with version 0.5 of Graph classes
 	- patch to Graph::Reader::Dot from Mark Hillebrand.
 	- fixed warnings "Using a hash as a reference is deprecated"
@@ -10,65 +14,62 @@
 	  which means you can safely have space, ':', '-', and other
 	  interesting characters in node ids.
 
-1.06	2002-jul-09 neilb
+1.06 2002-07-09
 
-	Added XML::Parser and XML::Writer as dependencies in Makefile.PL.
-	This was prompted by looking at testers.cpan.org, which has
-	this distribution as failing.
+	- Added XML::Parser and XML::Writer as dependencies in Makefile.PL.
+	  This was prompted by looking at testers.cpan.org, which has
+	  this distribution as failing.
 
-1.05	2002-mar-20 neilb
+1.05 2002-03-20
 
-	Graph::Writer::VCG - common attributes (label, color, and
-	text color) weren't supported on edges.
-	Bug and fix reported by Alexandre Cherif.
+	- Graph::Writer::VCG - common attributes (label, color, and
+	  text color) weren't supported on edges.
+	  Bug and fix reported by Alexandre Cherif.
+    - Oops, did I really do two 1.05 releases?!
 
-1.05	2002-jan-20 neilb
+1.05 2002-01-20
 
-	Added a basic test-suite.
+	- Added a basic test-suite.
+	- Commented out debugging output in the HTK Writer. Sorry Phil!
 
-	Commented out debugging output in the HTK Writer. Sorry Phil!
+104 2001-11-11
 
-1.04	2001-nov-11 neilb
+	- Added Graph::Reader::Dot, a reader for the Dot format
+	  contributed by Mark Hillebrand.
 
-	Added Graph::Reader::Dot, a reader for the Dot format
-	contributed by Mark Hillebrand.
+	- Fixed a bug in Graph::Reader::XML, found by Mark Hillebrand.
+	  The reader would only cope with a single <attribute> element
+	  inside each graph, node or edge element.
 
-	Fixed a bug in Graph::Reader::XML, found by Mark Hillebrand.
-	The reader would only cope with a single <attribute> element
-	inside each graph, node or edge element.
-
-	Changed contact email address to neil@bowers.com
+	- Changed contact email address to neil at bowers dot com
 
 1.03
 
-	Added reader and writer classes for HTK lattice files.
+	- Added reader and writer classes for HTK lattice files.
 
 1.02
-	Fixed a bug in the XML writer module - the way it was using
-	XML::Writer caused STDOUT to be closed after you've written
-	a graph. I consider it a bug in XML::Writer, but I was able
-	to change the way Graph::Writer::XML uses that module.
 
-	Basically it just means that we construct a new instance
-	of XML::Writer every time we write out a graph. For most
-	uses, this won't be a problem, but you'd notice a hit if
-	you were creating the writer and then writing a lot of graphs.
+	- Fixed a bug in the XML writer module - the way it was using
+	  XML::Writer caused STDOUT to be closed after you've written
+	  a graph. I consider it a bug in XML::Writer, but I was able
+	  to change the way Graph::Writer::XML uses that module.
 
-	This was noticed by Mike Hayward <hayward@loup.net>
+	  Basically it just means that we construct a new instance
+	  of XML::Writer every time we write out a graph. For most
+	  uses, this won't be a problem, but you'd notice a hit if
+	  you were creating the writer and then writing a lot of graphs.
+
+	  This was noticed by Mike Hayward <hayward@loup.net>
 
 1.01
 
-	Added support for URL attribute on nodes in Dot.
+	- Added support for URL attribute on nodes in Dot.
+	- Added support for almost all attributes understood by VCG.
+	- Added a rough cut at a Writer class for daVinci: Graph::Writer::daVinci
 
-	Added support for almost all attributes understood by VCG.
+1.00 2001-02
 
-	Added a rough cut at a Writer class for daVinci:
-		Graph::Writer::daVinci
+	- Initial release - has baseclass for Reader and Writer classes.
+	- Reader and Writer for simple XML format.
+	- Writers for Dot and VCG formats.
 
-1.00 feb 2001 neilb
-
-	Initial release - has baseclass for Reader and Writer classes.
-
-	Reader and Writer for simple XML format.
-
-	Writers for Dot and VCG formats.
