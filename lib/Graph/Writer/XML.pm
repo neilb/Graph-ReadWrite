@@ -1,16 +1,15 @@
 #
 # Graph::Writer::XML - write a directed graph out as XML
 #
-# $Id: XML.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
-#
 package Graph::Writer::XML;
 
-use Graph::Writer;
+use strict;
+use warnings;
+
+use parent 'Graph::Writer';
 use XML::Writer;
 
-use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
-@ISA = qw(Graph::Writer);
+our $VERSION = '2.01';
 
 
 #=======================================================================

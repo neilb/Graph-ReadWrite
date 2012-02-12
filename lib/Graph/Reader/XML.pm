@@ -4,13 +4,13 @@
 package Graph::Reader::XML;
 
 use strict;
+use warnings;
 
-use Graph::Reader;
+use parent 'Graph::Reader';
 use Carp;
 use XML::Parser;
 
 our $VERSION = '2.01';
-our @ISA = qw(Graph::Reader);
 
 #=======================================================================
 #

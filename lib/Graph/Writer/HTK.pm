@@ -1,17 +1,16 @@
 #
 # Graph::Writer::HTK - perl module for writing a Graph as an HTK lattice
 #
-# $Id: HTK.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
-#
 package Graph::Writer::HTK;
 
+use strict;
+use warnings;
+
 #=======================================================================
 #=======================================================================
 
-use Graph::Writer;
-use vars qw(@ISA $VERSION);
-@ISA = qw(Graph::Writer);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
+use parent 'Graph::Writer';
+our $VERSION = '2.01';
 
 my @graph_attributes = qw(base lmname lmscale wdpenalty);
 
@@ -62,42 +61,43 @@ sub _write_graph
     $node_num = 0;
     foreach $v (sort $graph->vertices)
     {
-	$v2n{$v} = $node_num;
-	print $FILE "I=$node_num";
-	foreach my $field (keys %node_attributes)
-	{
-	    foreach my $attr (@{ $node_attributes{$field} })
-	    {
-		if ($graph->has_vertex_attribute($v, $attr))
-		{
-		    print $FILE "  $field=", $graph->get_vertex_attribute($v, $attr);
-		    last;
-		}
-	    }
-	}
-	print $FILE "\n";
-	++$node_num;
+        $v2n{$v} = $node_num;
+        print $FILE "I=$node_num";
+        foreach my $field (keys %node_attributes)
+        {
+            foreach my $attr (@{ $node_attributes{$field} })
+            {
+                if ($graph->has_vertex_attribute($v, $attr))
+                {
+                    print $FILE "  $field=",
+                                $graph->get_vertex_attribute($v, $attr);
+                    last;
+                }
+            }
+        }
+        print $FILE "\n";
+        ++$node_num;
     }
 
     $edge_num = 0;
     foreach my $edge (sort _by_vertex $graph->edges)
     {
-	($from, $to) = @$edge;
-	print $FILE "J=$edge_num  S=", $v2n{$from}, "  E=", $v2n{$to};
-	foreach my $field (keys %edge_attributes)
-	{
-	    foreach my $attr (@{ $edge_attributes{$field} })
-	    {
-		if ($graph->has_edge_attribute($from, $to, $attr))
-		{
-		    print $FILE "  $field=",
-				$graph->get_vertex_attribute($from, $to, $attr);
-		    last;
-		}
-	    }
-	}
-	print $FILE "\n";
-	++$edge_num;
+        ($from, $to) = @$edge;
+        print $FILE "J=$edge_num  S=", $v2n{$from}, "  E=", $v2n{$to};
+        foreach my $field (keys %edge_attributes)
+        {
+            foreach my $attr (@{ $edge_attributes{$field} })
+            {
+                if ($graph->has_edge_attribute($from, $to, $attr))
+                {
+                    print $FILE "  $field=",
+                                $graph->get_vertex_attribute($from, $to, $attr);
+                    last;
+                }
+            }
+        }
+        print $FILE "\n";
+        ++$edge_num;
     }
 
     return 1;
@@ -120,10 +120,10 @@ Graph::Writer::HTK - write a perl Graph out as an HTK lattice file
 
 =head1 SYNOPSIS
 
-    use Graph::Writer::HTK;
-    
-    $writer = Graph::Reader::HTK->new();
-    $reader->write_graph($graph, 'mylattice.lat');
+  use Graph::Writer::HTK;
+  
+  $writer = Graph::Reader::HTK->new();
+  $reader->write_graph($graph, 'mylattice.lat');
 
 =head1 DESCRIPTION
 
@@ -155,7 +155,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2000-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2000-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2000, Canon Research Centre Europe. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify

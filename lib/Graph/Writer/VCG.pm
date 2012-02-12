@@ -1,16 +1,13 @@
 #
 # Graph::Writer::VCG - write a directed graph out in VCG format
 #
-# $Id: VCG.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
-#
 package Graph::Writer::VCG;
 
 use strict;
+use warnings;
 
-use Graph::Writer;
-use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
-@ISA = qw(Graph::Writer);
+use parent 'Graph::Writer';
+our $VERSION = '2.01';
 
 #-----------------------------------------------------------------------
 # Attribute type information
@@ -208,9 +205,9 @@ sub _write_graph
     #-------------------------------------------------------------------
     foreach $v (sort $graph->vertices)
     {
-	print $FILE "  node: { title: \"$v\"";
-	$aref = $graph->get_vertex_attributes($v);
-	_render_attributes('node', $aref, $FILE, 1);
+        print $FILE "  node: { title: \"$v\"";
+        $aref = $graph->get_vertex_attributes($v);
+        _render_attributes('node', $aref, $FILE, 1);
         print $FILE "  }\n";
     }
     print $FILE "\n";
@@ -220,10 +217,10 @@ sub _write_graph
     #-------------------------------------------------------------------
     foreach my $edge (sort _by_vertex $graph->edges)
     {
-	($from, $to) = @$edge;
-	print $FILE "  edge: { sourcename: \"$from\" targetname: \"$to\"";
-	$aref = $graph->get_edge_attributes($from, $to);
-	_render_attributes('edge', $aref, $FILE, 1);
+        ($from, $to) = @$edge;
+        print $FILE "  edge: { sourcename: \"$from\" targetname: \"$to\"";
+        $aref = $graph->get_edge_attributes($from, $to);
+        _render_attributes('edge', $aref, $FILE, 1);
         print $FILE "  }\n";
     }
 
@@ -265,20 +262,21 @@ sub _render_attributes
     @keys = grep(exists $attref->{$_}, keys %{$valid_attributes{$entity}});
     if (@keys > 0)
     {
-	print $FILE "\n";
-	foreach my $a (@keys)
-	{
-	    $type = $valid_attributes{$entity}->{$a};
-	    if (ref $type || $type == VCG_ATTR_TYPE_INTEGER
-		|| $type == VCG_ATTR_TYPE_FLOAT)
-	    {
-		print $FILE "  ", '  ' x $depth, "$a: ", $attref->{$a}, "\n";
-	    }
-	    else
-	    {
-		print $FILE "  ", '  ' x $depth, "$a: \"", $attref->{$a}, "\"\n";
-	    }
-	}
+        print $FILE "\n";
+        foreach my $a (@keys)
+        {
+            $type = $valid_attributes{$entity}->{$a};
+            if (ref $type || $type == VCG_ATTR_TYPE_INTEGER
+            || $type == VCG_ATTR_TYPE_FLOAT)
+            {
+                print $FILE "  ", '  ' x $depth, "$a: ", $attref->{$a}, "\n";
+            }
+            else
+            {
+                print $FILE "  ", '  ' x $depth,
+                            "$a: \"", $attref->{$a}, "\"\n";
+            }
+        }
     }
     return int @keys;
 }
@@ -293,14 +291,14 @@ Graph::Writer::VCG - write out directed graph in VCG format
 
 =head1 SYNOPSIS
 
-    use Graph;
-    use Graph::Writer::VCG;
-    
-    $graph = Graph->new();
-    # add edges and nodes to the graph
-    
-    $writer = Graph::Writer::VCG->new();
-    $writer->write_graph($graph, 'mygraph.vcg');
+  use Graph;
+  use Graph::Writer::VCG;
+  
+  $graph = Graph->new();
+  # add edges and nodes to the graph
+  
+  $writer = Graph::Writer::VCG->new();
+  $writer->write_graph($graph, 'mygraph.vcg');
 
 =head1 DESCRIPTION
 
@@ -320,7 +318,7 @@ as long as they are attributes understood by VCG.
 
 Constructor - generate a new writer instance.
 
-    $writer = Graph::Writer::VCG->new();
+  $writer = Graph::Writer::VCG->new();
 
 This doesn't take any arguments.
 
@@ -328,7 +326,7 @@ This doesn't take any arguments.
 
 Write a specific graph to a named file:
 
-    $writer->write_graph($graph, $file);
+  $writer->write_graph($graph, $file);
 
 The C<$file> argument can either be a filename,
 or a filehandle for a previously opened file.
@@ -382,7 +380,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

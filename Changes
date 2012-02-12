@@ -7,6 +7,8 @@ Revision history for perl distribution Graph-ReadWrite
     - changed calls to File::Compare::compare() to hopefully cope with
       EOL differences between Windows and Unix. Reported by Philip Potter,
       and fix noted by Max
+    - Ensured all modules were use'ing strict and warnings. Fixed warnings :-)
+    - Cleaned up formatting of all modules
     - renamed ChangeLog to Changes and reformatted as per CPAN::Changes::Spec
 
 2.00 2005-01-02
@@ -19,25 +21,24 @@ Revision history for perl distribution Graph-ReadWrite
 	  which means you can safely have space, ':', '-', and other
 	  interesting characters in node ids.
 
-1.06 2002-07-09
+1.07 2002-07-09
 
 	- Added XML::Parser and XML::Writer as dependencies in Makefile.PL.
 	  This was prompted by looking at testers.cpan.org, which has
 	  this distribution as failing.
 
-1.05 2002-03-20
+1.06 2002-03-20
 
 	- Graph::Writer::VCG - common attributes (label, color, and
 	  text color) weren't supported on edges.
 	  Bug and fix reported by Alexandre Cherif.
-    - Oops, did I really do two 1.05 releases?!
 
 1.05 2002-01-20
 
 	- Added a basic test-suite.
 	- Commented out debugging output in the HTK Writer. Sorry Phil!
 
-104 2001-11-11
+1.04 2001-11-11
 
 	- Added Graph::Reader::Dot, a reader for the Dot format
 	  contributed by Mark Hillebrand.

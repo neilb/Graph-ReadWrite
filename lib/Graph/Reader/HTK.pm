@@ -1,15 +1,15 @@
 #
 # Graph::Reader::HTK - perl module for reading an HTK lattice into a Graph
 #
-# $Id: HTK.pm,v 1.3 2005/01/02 19:03:14 neilb Exp $
-#
 package Graph::Reader::HTK;
 
-use Graph::Reader;
+use strict;
+use warnings;
+
+use parent 'Graph::Reader';
 use Carp;
-use vars qw(@ISA $VERSION);
-@ISA = qw(Graph::Reader);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
+
+our $VERSION = '2.01';
 
 my %node_attributes =
 (
@@ -62,117 +62,127 @@ sub _read_graph
     my $to;
     my $weight;
     my ($an, $av);
+    my $node_num;
+    my $link;
 
 
     while (<$FILE>)
     {
-	chop;
+        chop;
 
-	#---------------------------------------------------------------
-	# ignore version line
-	#---------------------------------------------------------------
-	if (/^\s*(V|VERSION)\s*=\s*(\S+)/) {
-	    $graph->set_graph_attribute('HTK_VERSION', $2);
-	    next;
-	}
+        #---------------------------------------------------------------
+        # ignore version line
+        #---------------------------------------------------------------
+        if (/^\s*(V|VERSION)\s*=\s*(\S+)/)
+        {
+            $graph->set_graph_attribute('HTK_VERSION', $2);
+            next;
+        }
 
-	if (/^\s*(base|lmname|lmscale|wdpenalty)\s*=\s*(\S+)/)
-	{
-	    # print STDERR "Setting graph attribute $1 to $2\n";
-	    $graph->set_graph_attribute($1, ''.$2);
-	}
+        if (/^\s*(base|lmname|lmscale|wdpenalty)\s*=\s*(\S+)/)
+        {
+            # print STDERR "Setting graph attribute $1 to $2\n";
+            $graph->set_graph_attribute($1, ''.$2);
+        }
 
-	#---------------------------------------------------------------
-	# line which says how many nodes & links we have
-	#---------------------------------------------------------------
-	if (/N\s*=\s*(\d+)\s*L\s*=\s*(\d+)/)
-	{
-	    # $NUM_NODES = $1;
-	    # $NUM_LINKS = $2;
-	    next;
-	}
+        #---------------------------------------------------------------
+        # line which says how many nodes & links we have
+        #---------------------------------------------------------------
+        if (/N\s*=\s*(\d+)\s*L\s*=\s*(\d+)/)
+        {
+            # $NUM_NODES = $1;
+            # $NUM_LINKS = $2;
+            next;
+        }
 
-	#---------------------------------------------------------------
-	# node definition
-	#---------------------------------------------------------------
-	if (/^I\s*=\s*(\d+)/mg)
-	{
-	    #---------------------------------------------------------------
-	    # strip off the fields from the rest of the line
-	    # and set appropriate attributes
-	    #---------------------------------------------------------------
-	    $node_num = "n$1";
-	    $graph->add_vertex($node_num);
-	    # print STDERR "Node $node_num:\n";
-	    while (/\s*(\S+)\s*=\s*(\S+)/mg)
-	    {
-		$an = $1;
-		$av = $2;
-		if (exists $node_attributes{$an})
-		{
-		    foreach my $a (@{ $node_attributes{$an} })
-		    {
-			# print STDERR "   attr $a = $av\n";
-			$graph->set_vertex_attribute($node_num, $a, $av);
-		    }
-		} else {
-		    carp "unknown node field \"$an\" - ignoring\n";
-		}
-	    }
-	    next;
-	}
-	elsif (/I\s*=\s*/)
-	{
-	    carp "unexpected format for node line \"$_\" - ignoring\n";
-	    next;
-	}
+        #---------------------------------------------------------------
+        # node definition
+        #---------------------------------------------------------------
+        if (/^I\s*=\s*(\d+)/mg)
+        {
+            #---------------------------------------------------------------
+            # strip off the fields from the rest of the line
+            # and set appropriate attributes
+            #---------------------------------------------------------------
+            $node_num = "n$1";
+            $graph->add_vertex($node_num);
+            # print STDERR "Node $node_num:\n";
+            while (/\s*(\S+)\s*=\s*(\S+)/mg)
+            {
+                $an = $1;
+                $av = $2;
+                if (exists $node_attributes{$an})
+                {
+                    foreach my $a (@{ $node_attributes{$an} })
+                    {
+                        # print STDERR "   attr $a = $av\n";
+                        $graph->set_vertex_attribute($node_num, $a, $av);
+                    }
+                }
+                else
+                {
+                    carp "unknown node field \"$an\" - ignoring\n";
+                }
+            }
+            next;
+        }
+        elsif (/I\s*=\s*/)
+        {
+            carp "unexpected format for node line \"$_\" - ignoring\n";
+            next;
+        }
 
-	#---------------------------------------------------------------
-	# edge definition
-	#---------------------------------------------------------------
-	if (/^J\s*=\s*(\d+)/mg)
-	{
-	    my %attr;
+        #---------------------------------------------------------------
+        # edge definition
+        #---------------------------------------------------------------
+        if (/^J\s*=\s*(\d+)/mg)
+        {
+            my %attr;
 
-	    $link = $1;
-	    # print STDERR "Edge $link:\n";
-	    while (/\s*(\S+)\s*=\s*(\S+)/mg)
-	    {
-		$an = $1;
-		$av = $2;
-		# print STDERR "   field $an = $av\n";
-		if (exists $edge_attributes{$an})
-		{
-		    foreach my $a (@{ $edge_attributes{$an} })
-		    {
-			$attr{$a} = $av;
-		    }
-		} else {
-		    carp "unknown link field \"$an\" - ignoring\n";
-		}
-	    }
+            $link = $1;
+            # print STDERR "Edge $link:\n";
+            while (/\s*(\S+)\s*=\s*(\S+)/mg)
+            {
+                $an = $1;
+                $av = $2;
+                # print STDERR "   field $an = $av\n";
+                if (exists $edge_attributes{$an})
+                {
+                    foreach my $a (@{ $edge_attributes{$an} })
+                    {
+                        $attr{$a} = $av;
+                    }
+                }
+                else
+                {
+                    carp "unknown link field \"$an\" - ignoring\n";
+                }
+            }
 
-	    if (exists $attr{START} && exists $attr{END}) {
-		$from = 'n'.$attr{START};
-		$to   = 'n'.$attr{END};
-		delete $attr{START};
-		delete $attr{END};
-	    } else {
-		carp "link on line $. doesn't have START and END - ignoring\n";
-		next;
-	    }
-	    $graph->add_edge($from, $to);
-	    foreach $a (keys %attr)
-	    {
-		# print STDERR "     attr $a = ", $attr{$a}, "\n";
-		$graph->set_edge_attribute($from, $to, $a, $attr{$a});
-	    }
-	}
-	elsif (/^J/)
-	{
-	    carp "unexpected format for link line \"$_\" - ignoring\n";
-	    next;
-	}
+            if (exists $attr{START} && exists $attr{END})
+            {
+                $from = 'n'.$attr{START};
+                $to   = 'n'.$attr{END};
+                delete $attr{START};
+                delete $attr{END};
+            }
+            else
+            {
+                carp "link on line $. doesn't have START and END - ignoring\n";
+                next;
+            }
+            $graph->add_edge($from, $to);
+            foreach $a (keys %attr)
+            {
+                # print STDERR "     attr $a = ", $attr{$a}, "\n";
+                $graph->set_edge_attribute($from, $to, $a, $attr{$a});
+            }
+        }
+        elsif (/^J/)
+        {
+            carp "unexpected format for link line \"$_\" - ignoring\n";
+            next;
+        }
     }
 
     return 1;
@@ -188,10 +198,10 @@ Graph::Reader::HTK - read an HTK lattice in as an instance of Graph
 
 =head1 SYNOPSIS
 
-    use Graph::Reader::HTK;
-    
-    $reader = Graph::Reader::HTK->new;
-    $graph = $reader->read_graph('mylattice.lat');
+  use Graph::Reader::HTK;
+  
+  $reader = Graph::Reader::HTK->new;
+  $graph = $reader->read_graph('mylattice.lat');
 
 =head1 DESCRIPTION
 

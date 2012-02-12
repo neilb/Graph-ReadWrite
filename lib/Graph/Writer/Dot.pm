@@ -1,16 +1,13 @@
 #
 # Graph::Writer::Dot - write a directed graph out in Dot format
 #
-# $Id: Dot.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
-#
 package Graph::Writer::Dot;
 
 use strict;
+use warnings;
 
-use Graph::Writer;
-use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
-@ISA = qw(Graph::Writer);
+use parent 'Graph::Writer';
+our $VERSION = '2.01';
 
 #-----------------------------------------------------------------------
 # List of valid dot attributes for the entire graph, per node,
@@ -99,11 +96,11 @@ sub _write_graph
     @keys = grep(exists $attrref->{$_}, @{$valid_attributes{'graph'}});
     if (@keys > 0)
     {
-	print $FILE "  /* graph attributes */\n";
-	foreach my $a (@keys)
-	{
-	    print $FILE "  $a = \"", $attrref->{$a}, "\";\n";
-	}
+        print $FILE "  /* graph attributes */\n";
+        foreach my $a (@keys)
+        {
+            print $FILE "  $a = \"", $attrref->{$a}, "\";\n";
+        }
     }
 
     #-------------------------------------------------------------------
@@ -112,14 +109,15 @@ sub _write_graph
     print $FILE "\n  /* list of nodes */\n";
     foreach $v (sort $graph->vertices)
     {
-	print $FILE "  \"$v\"";
-	$attrref = $graph->get_vertex_attributes($v);
-	@keys = grep(exists $attrref->{$_}, @{$valid_attributes{'node'}});
-	if (@keys > 0)
-	{
-	    print $FILE " [", join(',', map { "$_=\"".$attrref->{$_}."\"" } @keys), "]";
-	}
-	print $FILE ";\n";
+        print $FILE "  \"$v\"";
+        $attrref = $graph->get_vertex_attributes($v);
+        @keys = grep(exists $attrref->{$_}, @{$valid_attributes{'node'}});
+        if (@keys > 0)
+        {
+            print $FILE " [", join(',',
+                              map { "$_=\"".$attrref->{$_}."\"" } @keys), "]";
+        }
+        print $FILE ";\n";
     }
 
     #-------------------------------------------------------------------
@@ -128,15 +126,16 @@ sub _write_graph
     print $FILE "\n  /* list of edges */\n";
     foreach my $edge (sort _by_vertex $graph->edges)
     {
-	($from, $to) = @$edge;
-	print $FILE "  \"$from\" -> \"$to\"";
-	$attrref = $graph->get_edge_attributes($from, $to);
-	@keys = grep(exists $attrref->{$_}, @{$valid_attributes{'edge'}});
-	if (@keys > 0)
-	{
-	    print $FILE " [", join(',', map { "$_ = \"".$attrref->{$_}."\"" } @keys), "]";
-	}
-	print $FILE ";\n";
+        ($from, $to) = @$edge;
+        print $FILE "  \"$from\" -> \"$to\"";
+        $attrref = $graph->get_edge_attributes($from, $to);
+        @keys = grep(exists $attrref->{$_}, @{$valid_attributes{'edge'}});
+        if (@keys > 0)
+        {
+            print $FILE " [", join(',',
+                              map { "$_ = \"".$attrref->{$_}."\"" } @keys), "]";
+        }
+        print $FILE ";\n";
     }
 
     #-------------------------------------------------------------------
@@ -164,14 +163,14 @@ Graph::Writer::Dot - write out directed graph in Dot format
 
 =head1 SYNOPSIS
 
-    use Graph;
-    use Graph::Writer::Dot;
+  use Graph;
+  use Graph::Writer::Dot;
     
-    $graph = Graph->new();
-    # add edges and nodes to the graph
+  $graph = Graph->new();
+  # add edges and nodes to the graph
     
-    $writer = Graph::Writer::Dot->new();
-    $writer->write_graph($graph, 'mygraph.dot');
+  $writer = Graph::Writer::Dot->new();
+  $writer->write_graph($graph, 'mygraph.dot');
 
 =head1 DESCRIPTION
 
@@ -187,7 +186,7 @@ actually a set of classes developed by Jarkko Hietaniemi.
 
 Constructor - generate a new writer instance.
 
-    $writer = Graph::Writer::Dot->new();
+  $writer = Graph::Writer::Dot->new();
 
 This doesn't take any arguments.
 
@@ -195,7 +194,7 @@ This doesn't take any arguments.
 
 Write a specific graph to a named file:
 
-    $writer->write_graph($graph, $file);
+  $writer->write_graph($graph, $file);
 
 The C<$file> argument can either be a filename,
 or a filehandle for a previously opened file.
@@ -231,7 +230,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

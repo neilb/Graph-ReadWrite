@@ -1,16 +1,13 @@
 #
 # Graph::Writer::daVinci - write a directed graph out in daVinci format
 #
-# $Id: daVinci.pm,v 1.3 2005/01/02 19:04:05 neilb Exp $
-#
 package Graph::Writer::daVinci;
 
 use strict;
+use warnings;
 
-use Graph::Writer;
-use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
-@ISA = qw(Graph::Writer);
+use parent 'Graph::Writer';
+our $VERSION = '2.01';
 
 #-----------------------------------------------------------------------
 # List of valid daVinci attributes for the entire graph, per node,
@@ -56,15 +53,15 @@ sub _write_graph
     @nodes = sort $graph->source_vertices;
     if (@nodes == 0)
     {
-	die "expecting source vertices!\n";
+        die "expecting source vertices!\n";
     }
 
     print $FILE "[\n";
     while (@nodes > 0)
     {
-	$node = shift @nodes;
-	$self->_dump_node($graph, $FILE, $node, \%done, 1);
-	print $FILE ",\n" if @nodes > 0;
+        $node = shift @nodes;
+        $self->_dump_node($graph, $FILE, $node, \%done, 1);
+        print $FILE ",\n" if @nodes > 0;
     }
     print $FILE "\n]\n";
 
@@ -77,15 +74,16 @@ sub _write_graph
     @edges = sort _by_vertex $graph->edges;
     for (my $i = 0; $i < @edges; $i++)
     {
-	($from, $to) = @{ $edges[$i] };
-	print $FILE "  $from -> $to";
-	$aref = $graph->get_graph_attributes($from, $to);
-	@keys = grep(exists $aref->{$_}, @{$valid_attributes{'edge'}});
-	if (@keys > 0)
-	{
-	    print $FILE " [", join(',', map { "$_ = \"".$aref->{$_}."\"" } @keys), "]";
-	}
-	print $FILE ", " if $i < @edges - 1;
+        ($from, $to) = @{ $edges[$i] };
+        print $FILE "  $from -> $to";
+        $aref = $graph->get_graph_attributes($from, $to);
+        @keys = grep(exists $aref->{$_}, @{$valid_attributes{'edge'}});
+        if (@keys > 0)
+        {
+            print $FILE " [", join(',',
+                        map { "$_ = \"".$aref->{$_}."\"" } @keys), "]";
+        }
+        print $FILE ", " if $i < @edges - 1;
     }
 
     return 1;
@@ -119,53 +117,56 @@ sub _dump_node
 
     if (exists $doneref->{$node})
     {
-	print $FILE ' ' x (2 * $depth), "r(\"Node $node\")";
+        print $FILE ' ' x (2 * $depth), "r(\"Node $node\")";
     }
     else
     {
-	print $FILE ' ' x (2 * $depth), "l(\"Node $node\", n(\"\"";
-	$aref = $graph->get_vertex_attributes($node);
-	@keys = grep(exists $aref->{$_}, @{$valid_attributes{'node'}});
-	if (@keys > 0)
-	{
-	    print $FILE ", [", join(', ', map { "a(\"$_\", \"".$aref->{$_}."\")" } @keys), "]";
-	}
-	else
-	{
-	    print $FILE ", []";
-	}
+        print $FILE ' ' x (2 * $depth), "l(\"Node $node\", n(\"\"";
+        $aref = $graph->get_vertex_attributes($node);
+        @keys = grep(exists $aref->{$_}, @{$valid_attributes{'node'}});
+        if (@keys > 0)
+        {
+            print $FILE ", [", join(', ',
+                        map { "a(\"$_\", \"".$aref->{$_}."\")" } @keys), "]";
+        }
+        else
+        {
+            print $FILE ", []";
+        }
 
-	$doneref->{$node} = 1;
+        $doneref->{$node} = 1;
 
-	@children = $graph->successors($node);
-	if (@children == 0)
-	{
-	    print $FILE ", []";
-	}
-	else
-	{
-	    print $FILE ",\n", ' ' x (2 * $depth + 1), "[\n";
-	    while (@children > 0)
-	    {
-		$child = shift @children;
-		print $FILE ' ' x (2 * $depth + 2), "l(\"Edge ${node}->$child\", e(\"\", [";
+        @children = $graph->successors($node);
+        if (@children == 0)
+        {
+            print $FILE ", []";
+        }
+        else
+        {
+            print $FILE ",\n", ' ' x (2 * $depth + 1), "[\n";
+            while (@children > 0)
+            {
+                $child = shift @children;
+                print $FILE ' ' x (2 * $depth + 2),
+                            "l(\"Edge ${node}->$child\", e(\"\", [";
 
-		# write out any attributes of the edge
-		$aref = $graph->get_edge_attributes($node, $child);
-		@keys = grep(exists $aref->{$_}, @{$valid_attributes{'edge'}});
-		if (@keys > 0)
-		{
-		    print $FILE join(', ', map { "a(\"$_\", \"".$aref->{$_}."\")" } @keys);
-		}
+                # write out any attributes of the edge
+                $aref = $graph->get_edge_attributes($node, $child);
+                @keys = grep(exists $aref->{$_}, @{$valid_attributes{'edge'}});
+                if (@keys > 0)
+                {
+                    print $FILE join(', ',
+                                map { "a(\"$_\", \"".$aref->{$_}."\")" } @keys);
+                }
 
-		print $FILE "],\n";
-		$self->_dump_node($graph, $FILE, $child, $doneref, $depth+2);
-		print $FILE "))";
-		print $FILE ",\n" if @children > 0;
-	    }
-	    print $FILE ' ' x (2 * $depth + 1), "]";
-	}
-	print $FILE "))";
+                print $FILE "],\n";
+                $self->_dump_node($graph, $FILE, $child, $doneref, $depth+2);
+                print $FILE "))";
+                print $FILE ",\n" if @children > 0;
+            }
+            print $FILE ' ' x (2 * $depth + 1), "]";
+        }
+        print $FILE "))";
     }
 }
 
@@ -179,14 +180,14 @@ Graph::Writer::daVinci - write out directed graph in daVinci format
 
 =head1 SYNOPSIS
 
-    use Graph;
-    use Graph::Writer::daVinci;
+  use Graph;
+  use Graph::Writer::daVinci;
     
-    $graph = Graph->new();
-    # add edges and nodes to the graph
+  $graph = Graph->new();
+  # add edges and nodes to the graph
     
-    $writer = Graph::Writer::daVinci->new();
-    $writer->write_graph($graph, 'mygraph.davinci');
+  $writer = Graph::Writer::daVinci->new();
+  $writer->write_graph($graph, 'mygraph.davinci');
 
 =head1 DESCRIPTION
 
@@ -201,7 +202,7 @@ actually a set of classes developed by Jarkko Hietaniemi.
 
 Constructor - generate a new writer instance.
 
-    $writer = Graph::Writer::daVinci->new();
+  $writer = Graph::Writer::daVinci->new();
 
 This doesn't take any arguments.
 
@@ -209,7 +210,7 @@ This doesn't take any arguments.
 
 Write a specific graph to a named file:
 
-    $writer->write_graph($graph, $file);
+  $writer->write_graph($graph, $file);
 
 The C<$file> argument can either be a filename,
 or a filehandle for a previously opened file.
@@ -244,7 +245,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify

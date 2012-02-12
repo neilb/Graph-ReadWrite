@@ -1,14 +1,12 @@
 #
 # Graph::Writer - perl base class for Graph file format writers
 #
-# $Id: Writer.pm,v 1.3 2005/01/02 19:01:06 neilb Exp $
-#
 package Graph::Writer;
 
 use strict;
+use warnings;
 
-use vars qw($VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
+our $VERSION = '2.01';
 
 use IO::File;
 
@@ -66,18 +64,18 @@ sub write_graph
 
     if (ref $filename)
     {
-	$self->_write_graph($graph, $filename);
+        $self->_write_graph($graph, $filename);
     }
     else
     {
-	my $FILE = IO::File->new("> $filename");
-	if (not defined $FILE)
-	{
-	    warn "couldn't write to $filename: $!\n";
-	    return 0;
-	}
-	$self->_write_graph($graph, $FILE);
-	$FILE->close();
+        my $FILE = IO::File->new("> $filename");
+        if (not defined $FILE)
+        {
+            warn "couldn't write to $filename: $!\n";
+            return 0;
+        }
+        $self->_write_graph($graph, $FILE);
+        $FILE->close();
     }
 
     return 1;
@@ -93,17 +91,17 @@ Graph::Writer - base class for Graph file format writers
 
 =head1 SYNOPSIS
 
-    package Graph::Writer::MyFormat;
-    use Graph::Writer;
-    use vars qw(@ISA);
-    @ISA = qw(Graph::Writer);
+  package Graph::Writer::MyFormat;
+  use Graph::Writer;
+  use vars qw(@ISA);
+  @ISA = qw(Graph::Writer);
     
-    sub _write_graph
-    {
-        my ($self, $graph, $FILE) = @_;
+  sub _write_graph
+  {
+    my ($self, $graph, $FILE) = @_;
         
-        # write $graph to $FILE
-    }
+    # write $graph to $FILE
+  }
 
 =head1 DESCRIPTION
 
@@ -125,7 +123,7 @@ is a virtual method, or whatever the correct lingo is.
 You're not meant to call this on the base class,
 it is inherited by the subclasses. Ie if you do something like:
 
-    $writer = Graph::Writer->new();
+  $writer = Graph::Writer->new();
 
 It will throw an exception.
 
@@ -133,7 +131,7 @@ It will throw an exception.
 
 Read a graph from the specified file:
 
-    $graph = $writer->write_graph($file);
+  $graph = $writer->write_graph($file);
 
 The C<$file> argument can either be a filename,
 or a filehandle for a previously opened file.
@@ -145,26 +143,26 @@ which subclasses B<Graph::Writer>. For example, suppose
 DGF is a directed graph format - create a B<Graph::Writer::DGF> module,
 with the following structure:
 
-    package Graph::Writer::DGF;
+  package Graph::Writer::DGF;
     
-    use Graph::Writer;
-    use vars qw(@ISA);
-    @ISA = qw(Graph::Writer);
+  use Graph::Writer;
+  use vars qw(@ISA);
+  @ISA = qw(Graph::Writer);
 
-    sub _write_graph
+  sub _write_graph
+  {
+    my $self  = shift;
+    my $graph = shift;
+    my $FILE  = shift;
+        
+    while (<$FILE>)
     {
-        my $self  = shift;
-        my $graph = shift;
-        my $FILE  = shift;
-        
-        while (<$FILE>)
-        {
-	}
-        
-        return 1;
     }
+        
+    return 1;
+  }
     
-    1;
+  1;
 
 Note the leading underscore on the B<_write_graph()> method.
 The base class provides the public method, and invokes the
@@ -176,21 +174,21 @@ which will be invoked by the base class's constructor.
 You should invoke the superclass's initialiser as well,
 as follows:
 
-    sub _init
-    {
-        my $self = shift;
+  sub _init
+  {
+    my $self = shift;
     
-        $self->SUPER::_init();
+    $self->SUPER::_init();
         
-        # your initialisation here
-    }
+    # your initialisation here
+  }
 
 Someone can then use your class as follows:
 
-    use Graph::Writer::DGF;
-    
-    $writer = Graph::Writer::DGF->new();
-    $writer->write_graph($graph, 'foo.dgf');
+  use Graph::Writer::DGF;
+  
+  $writer = Graph::Writer::DGF->new();
+  $writer->write_graph($graph, 'foo.dgf');
 
 =head1 SEE ALSO
 
@@ -236,7 +234,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This script is free software; you can redistribute it and/or modify
