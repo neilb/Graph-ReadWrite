@@ -2,6 +2,8 @@ Revision history for perl distribution Graph-ReadWrite
 
 2.01 2012-02-12
 
+    - Fixed RT bug #39792: trying to call method set_graph_attribute()
+      on Graph::Reader::XML, which should have been set_attribute().
     - changed calls to File::Compare::compare() to hopefully cope with
       EOL differences between Windows and Unix. Reported by Philip Potter,
       and fix noted by Max
