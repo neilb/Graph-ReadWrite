@@ -1,11 +1,11 @@
 
 			Graph-ReadWrite
-			      2.00
+			      2.01
 
 This is a collection of perl classes for reading and writing
 directed graphs in a variety of file formats. The graphs are
 represented in Perl using Jarkko Hietaniemi's Graph classes.
-Version 2.0 of this distribution works with version 0.5 and
+Version 2+ of this distribution works with version 0.5 and
 later of the Graph distribution.
 
 There are two base classes:
@@ -65,4 +65,3 @@ you may get a warning about an undefined value from one of the tests.
 Bugs, suggestions, and new readers and writers will be gratefully received.
 
 Neil Bowers <neil@bowers.com>
-$Id: README,v 1.2 2005/01/02 19:00:08 neilb Exp $
