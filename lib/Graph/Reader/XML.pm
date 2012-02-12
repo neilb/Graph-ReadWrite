@@ -1,8 +1,6 @@
 #
 # Graph::Reader::XML - perl class for reading directed graphs from XML
 #
-# $Id: XML.pm,v 1.3 2005/01/02 19:03:14 neilb Exp $
-#
 package Graph::Reader::XML;
 
 use strict;
@@ -11,9 +9,8 @@ use Graph::Reader;
 use Carp;
 use XML::Parser;
 
-use vars qw(@ISA $VERSION);
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
-@ISA = qw(Graph::Reader);
+our $VERSION = '2.01';
+our @ISA = qw(Graph::Reader);
 
 #=======================================================================
 #
@@ -80,32 +77,32 @@ sub handle_start
 
     if ($el eq 'attribute')
     {
-	if (exists $attr{name} && exists $attr{value})
-	{
-	    $self->set_graph_attribute($attr{name}, $attr{value});
-	}
-	else
-	{
-	    carp "attribute should have name and value - ignoring\n";
-	}
+        if (exists $attr{name} && exists $attr{value})
+        {
+            $self->set_attribute($attr{name}, $attr{value});
+        }
+        else
+        {
+            carp "attribute should have name and value - ignoring\n";
+        }
     }
     elsif ($el eq 'node')
     {
-	$graph->add_vertex($attr{id});
-	push(@{$self->{CONTEXT}}, [$el, $attr{id}]);
+        $graph->add_vertex($attr{id});
+        push(@{$self->{CONTEXT}}, [$el, $attr{id}]);
     }
     elsif ($el eq 'edge')
     {
-	$graph->add_edge($attr{from}, $attr{to});
-	push(@{$self->{CONTEXT}}, [$el, $attr{from}, $attr{to}]);
+        $graph->add_edge($attr{from}, $attr{to});
+        push(@{$self->{CONTEXT}}, [$el, $attr{from}, $attr{to}]);
     }
     elsif ($el eq 'graph')
     {
-	push(@{$self->{CONTEXT}}, [$el]);
+        push(@{$self->{CONTEXT}}, [$el]);
     }
     else
     {
-	carp "unknown element \"$el\"\n";
+        carp "unknown element \"$el\"\n";
     }
 }
 
@@ -142,8 +139,8 @@ sub set_attribute
 
     if (@{$self->{CONTEXT}} == 0)
     {
-	carp "attribute element with no context - ignoring!\n";
-	return;
+        carp "attribute element with no context - ignoring!\n";
+        return;
     }
 
     my $graph = $self->{GRAPH};
@@ -151,19 +148,19 @@ sub set_attribute
 
     if ($el eq 'node')
     {
-	$graph->set_vertex_attribute($args[0], $name, $value);
+        $graph->set_vertex_attribute($args[0], $name, $value);
     }
     elsif ($el eq 'edge')
     {
-	$graph->set_edge_attribute($args[0], $args[1], $name, $value);
+        $graph->set_edge_attribute($args[0], $args[1], $name, $value);
     }
     elsif ($el eq 'graph')
     {
-	$graph->set_graph_attribute($name, $value);
+        $graph->set_graph_attribute($name, $value);
     }
     else
     {
-	carp "unexpected context for attribute\n";
+        carp "unexpected context for attribute\n";
     }
 }
 
@@ -175,11 +172,11 @@ Graph::Reader::XML - class for reading a Graph instance from XML
 
 =head1 SYNOPSIS
 
-    use Graph::Reader::XML;
-    use Graph;
-    
-    $reader = Graph::Reader::XML->new();
-    $graph = $reader->read_graph('mygraph.xml');
+  use Graph::Reader::XML;
+  use Graph;
+  
+  $reader = Graph::Reader::XML->new();
+  $graph = $reader->read_graph('mygraph.xml');
 
 =head1 DESCRIPTION
 
@@ -200,7 +197,7 @@ which defines the generic interface for Graph reader classes.
 
 Constructor - generate a new reader instance.
 
-    $reader = Graph::Reader::XML->new();
+  $reader = Graph::Reader::XML->new();
 
 This doesn't take any arguments.
 
@@ -208,7 +205,7 @@ This doesn't take any arguments.
 
 Read a graph from a file:
 
-    $graph = $reader->read_graph( $file );
+  $graph = $reader->read_graph( $file );
 
 The C<$file> argument can be either a filename
 or a filehandle of a previously opened file.
@@ -242,7 +239,7 @@ Neil Bowers E<lt>neil@bowers.comE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001-2005, Neil Bowers. All rights reserved.
+Copyright (c) 2001-2012, Neil Bowers. All rights reserved.
 Copyright (c) 2001, Canon Research Centre Europe. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify
