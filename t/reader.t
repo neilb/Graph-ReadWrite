@@ -55,7 +55,7 @@ $writer = Graph::Writer::HTK->new();
 if (defined($reader) && defined($writer)
     && ($ingraph = $reader->read_graph($testfile))
     && $writer->write_graph($ingraph, $genfile)
-    && compare($genfile, $testfile) == 0)
+    && compare($genfile, $testfile, -1) == 0)
 {
     print "ok 2\n";
 } else {

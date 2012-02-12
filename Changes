@@ -2,6 +2,9 @@ Revision history for perl distribution Graph-ReadWrite
 
 2.01 2012-02-12
 
+    - changed calls to File::Compare::compare() to hopefully cope with
+      EOL differences between Windows and Unix. Reported by Philip Potter,
+      and fix noted by Max
     - renamed ChangeLog to Changes and reformatted as per CPAN::Changes::Spec
 
 2.00 2005-01-02

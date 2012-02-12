@@ -36,7 +36,7 @@ $expected = 't/data/simple.xml';
 $writer = Graph::Writer::XML->new();
 if (defined($writer)
     && $writer->write_graph($graph, $genfile)
-    && compare($genfile, $expected) == 0)
+    && compare($genfile, $expected, -1) == 0)
 {
     print "ok 1\n";
 } else {
@@ -52,7 +52,7 @@ $expected = 't/data/simple.htk';
 $writer = Graph::Writer::HTK->new();
 if (defined($writer)
     && $writer->write_graph($graph, $genfile)
-    && compare($genfile, $expected) == 0)
+    && compare($genfile, $expected, -1) == 0)
 {
     print "ok 2\n";
 } else {
@@ -68,7 +68,7 @@ $expected = 't/data/simple.dot';
 $writer = Graph::Writer::Dot->new();
 if (defined($writer)
     && $writer->write_graph($graph, $genfile)
-    && compare($genfile, $expected) == 0)
+    && compare($genfile, $expected, -1) == 0)
 {
     print "ok 3\n";
 } else {
@@ -84,7 +84,7 @@ $expected = 't/data/simple.vcg';
 $writer = Graph::Writer::VCG->new();
 if (defined($writer)
     && $writer->write_graph($graph, $genfile)
-    && compare($genfile, $expected) == 0)
+    && compare($genfile, $expected, -1) == 0)
 {
     print "ok 4\n";
 } else {
@@ -100,7 +100,7 @@ $expected = 't/data/simple.davinci';
 $writer = Graph::Writer::daVinci->new();
 if (defined($writer)
     && $writer->write_graph($graph, $genfile)
-    && compare($genfile, $expected) == 0)
+    && compare($genfile, $expected, -1) == 0)
 {
     print "ok 5\n";
 } else {
