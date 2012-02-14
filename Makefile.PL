@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker;
         DISTNAME     => 'Graph-ReadWrite',
         ABSTRACT     => 'Classes for reading and writing directed graphs',
         AUTHOR       => 'Neil Bowers <neil@bowers.com>',
-        VERSION      => '2.02',
+        VERSION      => '2.03',
         META_MERGE   => {
              resources => {
                 repository => 'https://github.com/neilbowers/Graph-ReadWrite',
@@ -22,6 +22,9 @@ use ExtUtils::MakeMaker;
                          'XML::Parser'         => 0,
                          'XML::Writer'         => 0,
                          'Parse::Yapp::Driver' => 0,
+                         'parent'              => 0,
+                         'Carp'                => 0,
+                         'File::Compare'       => 0,
                         },
         dist         => {COMPRESS => 'gzip', SUFFIX => 'gz'},
       );
