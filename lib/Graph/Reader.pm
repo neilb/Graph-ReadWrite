@@ -6,7 +6,7 @@ package Graph::Reader;
 use strict;
 use warnings;
 
-our $VERSION = '2.02';
+our $VERSION = '2.03';
 
 use IO::File;
 use Graph;
