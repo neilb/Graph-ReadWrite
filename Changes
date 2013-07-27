@@ -1,8 +1,9 @@
 Revision history for perl distribution Graph-ReadWrite
 
-2.03 2013-07-27
+2.04 2013-07-27
 
-    - added license type to Metadata
+    - Added license type to Metadata
+    - Ensured all releases in this file have a date, as per CPAN::Changes::Spec
 
 2.03 2012-02-14
 

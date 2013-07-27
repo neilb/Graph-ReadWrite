@@ -9,7 +9,7 @@ use warnings;
 use parent 'Graph::Reader';
 use Carp;
 
-our $VERSION = '2.03';
+our $VERSION = '2.04';
 
 my %node_attributes =
 (
