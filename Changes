@@ -1,5 +1,9 @@
 Revision history for perl distribution Graph-ReadWrite
 
+2.03 2013-07-27
+
+    - added license type to Metadata
+
 2.03 2012-02-14
 
     - added ABSTRACT, AUTHOR and github repository info to Makefile.PL
@@ -60,11 +64,11 @@ Revision history for perl distribution Graph-ReadWrite
 
 	- Changed contact email address to neil at bowers dot com
 
-1.03
+1.03 2001-04-25
 
 	- Added reader and writer classes for HTK lattice files.
 
-1.02
+1.02 2001-03-18
 
 	- Fixed a bug in the XML writer module - the way it was using
 	  XML::Writer caused STDOUT to be closed after you've written
@@ -78,7 +82,7 @@ Revision history for perl distribution Graph-ReadWrite
 
 	  This was noticed by Mike Hayward <hayward@loup.net>
 
-1.01
+1.01 2001-03-12
 
 	- Added support for URL attribute on nodes in Dot.
 	- Added support for almost all attributes understood by VCG.

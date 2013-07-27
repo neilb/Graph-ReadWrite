@@ -10,7 +10,8 @@ use ExtUtils::MakeMaker;
         DISTNAME     => 'Graph-ReadWrite',
         ABSTRACT     => 'Classes for reading and writing directed graphs',
         AUTHOR       => 'Neil Bowers <neil@bowers.com>',
-        VERSION      => '2.03',
+        VERSION      => '2.04',
+        LICENSE      => 'perl',
         META_MERGE   => {
              resources => {
                 repository => 'https://github.com/neilbowers/Graph-ReadWrite',
