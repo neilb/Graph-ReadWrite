@@ -3,6 +3,7 @@ Revision history for perl distribution Graph-ReadWrite
 2.05 2014-01-22
 
     - Specified min perl version as 5.6.0
+    - Added ExtUtils::MakeMaker to CONFIGURE_REQUIRES
     - Changed Makefile.PL to metaspec 2
 
 2.04 2013-07-27

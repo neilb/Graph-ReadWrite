@@ -15,7 +15,7 @@ if ($mm_ver =~ /_/) { # dev version
     DISTNAME     => 'Graph-ReadWrite',
     ABSTRACT     => 'Classes for reading and writing directed graphs',
     AUTHOR       => 'Neil Bowers <neil@bowers.com>',
-    VERSION      => '2.04',
+    VERSION      => '2.05',
     LICENSE      => 'perl',
 
     ($mm_ver <= 6.45
@@ -46,6 +46,13 @@ if ($mm_ver =~ /_/) { # dev version
 
     ($mm_ver >= 6.48
         ? (MIN_PERL_VERSION => 5.006)
+        : ()
+    ),
+
+    ($mm_ver >= 6.52
+        ? (CONFIGURE_REQUIRES => {
+                'ExtUtils::MakeMaker' => 6.30,
+          })
         : ()
     ),
 
