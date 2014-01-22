@@ -1,5 +1,9 @@
 Revision history for perl distribution Graph-ReadWrite
 
+2.05 2014-01-22
+
+    - Changed Makefile.PL to metaspec 2
+
 2.04 2013-07-27
 
     - Added license type to Metadata
