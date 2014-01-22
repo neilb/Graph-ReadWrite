@@ -960,7 +960,7 @@ sub _Lexer {
 use Graph::Reader;
 use vars qw(@ISA $VERSION $UseNodeAttr $UseEdgeAttr);
 
-$VERSION = sprintf("%d.%02d", q$Revision: 1.3 $ =~ /(\d+)\.(\d+)/);
+$VERSION = '2.05';
 @ISA = qw(Parse::Yapp::Driver Graph::Reader);	# this will override setting from yapp
 
 sub _init {

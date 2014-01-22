@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.04';
+our $VERSION = '2.05';
 
 #-----------------------------------------------------------------------
 # List of valid dot attributes for the entire graph, per node,

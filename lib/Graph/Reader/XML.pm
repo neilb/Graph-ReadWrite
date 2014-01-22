@@ -10,7 +10,7 @@ use parent 'Graph::Reader';
 use Carp;
 use XML::Parser;
 
-our $VERSION = '2.04';
+our $VERSION = '2.05';
 
 #=======================================================================
 #
