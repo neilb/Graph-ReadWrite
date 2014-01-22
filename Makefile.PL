@@ -43,6 +43,12 @@ if ($mm_ver =~ /_/) { # dev version
                      'Carp'                => 0,
                      'File::Compare'       => 0,
                     },
+
+    ($mm_ver >= 6.48
+        ? (MIN_PERL_VERSION => 5.006)
+        : ()
+    ),
+
     dist         => {COMPRESS => 'gzip', SUFFIX => 'gz'},
 );
 
