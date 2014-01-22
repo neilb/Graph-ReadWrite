@@ -2,6 +2,8 @@ Revision history for perl distribution Graph-ReadWrite
 
 2.05 2014-01-22
 
+    - the daVinci writer would sometimes fail due to the random
+      hash order change in Perl 5.18
     - Specified min perl version as 5.6.0
     - Added ExtUtils::MakeMaker to CONFIGURE_REQUIRES
     - Changed Makefile.PL to metaspec 2

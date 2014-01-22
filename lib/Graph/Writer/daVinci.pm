@@ -136,7 +136,7 @@ sub _dump_node
 
         $doneref->{$node} = 1;
 
-        @children = $graph->successors($node);
+        @children = sort $graph->successors($node);
         if (@children == 0)
         {
             print $FILE ", []";
