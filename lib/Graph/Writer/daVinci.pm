@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.04';
+our $VERSION = '2.06';
 
 #-----------------------------------------------------------------------
 # List of valid daVinci attributes for the entire graph, per node,

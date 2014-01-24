@@ -1,5 +1,10 @@
 Revision history for perl distribution Graph-ReadWrite
 
+2.06 2014-01-24
+
+    - Graph::Write::daVinci had a different version number from
+      all the other modules.
+
 2.05 2014-01-22
 
     - the daVinci writer would sometimes fail due to the random

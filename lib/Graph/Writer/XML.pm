@@ -9,7 +9,7 @@ use warnings;
 use parent 'Graph::Writer';
 use XML::Writer;
 
-our $VERSION = '2.05';
+our $VERSION = '2.06';
 
 
 #=======================================================================

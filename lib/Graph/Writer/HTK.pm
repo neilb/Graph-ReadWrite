@@ -10,7 +10,7 @@ use warnings;
 #=======================================================================
 
 use parent 'Graph::Writer';
-our $VERSION = '2.05';
+our $VERSION = '2.06';
 
 my @graph_attributes = qw(base lmname lmscale wdpenalty);
 
