@@ -11,7 +11,7 @@ if ($mm_ver =~ /_/) { # dev version
 }
 
 &WriteMakefile(
-    NAME         => 'Graph-ReadWrite',
+    NAME         => 'Graph::ReadWrite',
     DISTNAME     => 'Graph-ReadWrite',
     ABSTRACT     => 'Classes for reading and writing directed graphs',
     AUTHOR       => 'Neil Bowers <neil@bowers.com>',

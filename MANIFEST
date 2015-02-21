@@ -3,6 +3,7 @@ MANIFEST
 README
 TODO
 Changes
+lib/Graph/ReadWrite.pm
 lib/Graph/Writer.pm
 lib/Graph/Writer/Dot.pm
 lib/Graph/Writer/XML.pm
