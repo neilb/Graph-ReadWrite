@@ -209,7 +209,7 @@ Graph::Reader::HTK - read an HTK lattice in as an instance of Graph
 
 =over 4
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's Graph class and others, used for representing
 and manipulating directed graphs. Available from CPAN.
