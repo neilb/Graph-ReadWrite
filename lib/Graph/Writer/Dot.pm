@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.06';
+our $VERSION = '2.07';
 
 #-----------------------------------------------------------------------
 # List of valid dot attributes for the entire graph, per node,
@@ -203,12 +203,12 @@ or a filehandle for a previously opened file.
 
 =over 4
 
-=item http://www.graphviz.org/
+=item L<www.graphviz.org|http://www.graphviz.org/>
 
 The home page for the AT+T graphviz toolkit that
 includes the dot tool.
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's modules for representing directed graphs,
 available from CPAN under modules/by-module/Graph/
@@ -218,7 +218,7 @@ available from CPAN under modules/by-module/Graph/
 The O'Reilly book which has a chapter on directed graphs,
 which is based around Jarkko's modules.
 
-=item Graph::Writer
+=item L<Graph::Writer>
 
 The base-class for Graph::Writer::Dot
 

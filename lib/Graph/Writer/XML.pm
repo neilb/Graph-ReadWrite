@@ -9,7 +9,7 @@ use warnings;
 use parent 'Graph::Writer';
 use XML::Writer;
 
-our $VERSION = '2.06';
+our $VERSION = '2.07';
 
 
 #=======================================================================
@@ -180,12 +180,12 @@ you're on your own.
 
 =over 4
 
-=item XML::Writer
+=item L<XML::Writer>
 
 The perl module used to actually write out the XML.
 It handles entities etc.
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's modules for representing directed graphs,
 available from CPAN under modules/by-module/Graph/
@@ -195,7 +195,7 @@ available from CPAN under modules/by-module/Graph/
 The O'Reilly book which has a chapter on directed graphs,
 which is based around Jarkko's modules.
 
-=item Graph::Writer
+=item L<Graph::Writer>
 
 The base-class for Graph::Writer::XML
 

@@ -6,7 +6,7 @@ package Graph::Reader;
 use strict;
 use warnings;
 
-our $VERSION = '2.06';
+our $VERSION = '2.07';
 
 use IO::File;
 use Graph;
@@ -193,7 +193,7 @@ Someone can then use your class as follows:
 
 =over 4
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's modules for representing directed graphs,
 available from CPAN under modules/by-module/Graph/
@@ -203,12 +203,12 @@ available from CPAN under modules/by-module/Graph/
 This O'Reilly book has a chapter on directed graphs,
 which is based around Jarkko's modules.
 
-=item Graph::Reader::XML
+=item L<Graph::Reader::XML>
 
 A simple subclass of this class for reading a simple XML format
 for directed graphs.
 
-=item Graph::Writer
+=item L<Graph::Writer>
 
 A baseclass for Graph file format writers.
 

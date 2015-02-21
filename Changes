@@ -1,5 +1,8 @@
 Revision history for perl distribution Graph-ReadWrite
 
+2.07 2015-02-21 NEILB
+    - Made mentions in SEE ALSO be links. MANWAR++ for starting this.
+
 2.06 2014-01-24
 
     - Graph::Write::daVinci had a different version number from

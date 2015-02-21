@@ -216,12 +216,12 @@ and manipulating directed graphs. Available from CPAN.
 Also described / used in the chapter on directed graph algorithms
 in the B<Algorithms in Perl> book from O'Reilly.
 
-=item Graph::Reader
+=item L<Graph::Reader>
 
 The base-class for this module, which defines the public methods,
 and describes the ideas behind Graph reader and writer modules.
 
-=item Graph::Writer::HTK
+=item L<Graph::Writer::HTK>
 
 A class which will write a perl Graph out as an HTK lattice.
 

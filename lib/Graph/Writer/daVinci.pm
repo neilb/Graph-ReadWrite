@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.06';
+our $VERSION = '2.07';
 
 #-----------------------------------------------------------------------
 # List of valid daVinci attributes for the entire graph, per node,
@@ -223,7 +223,7 @@ or a filehandle for a previously opened file.
 
 The home page for the daVinci.
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's modules for representing directed graphs,
 available from CPAN under modules/by-module/Graph/
@@ -233,7 +233,7 @@ available from CPAN under modules/by-module/Graph/
 The O'Reilly book which has a chapter on directed graphs,
 which is based around Jarkko's modules.
 
-=item Graph::Writer
+=item L<Graph::Writer>
 
 The base-class for Graph::Writer::daVinci
 

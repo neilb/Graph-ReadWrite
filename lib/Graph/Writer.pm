@@ -6,7 +6,7 @@ package Graph::Writer;
 use strict;
 use warnings;
 
-our $VERSION = '2.06';
+our $VERSION = '2.07';
 
 use IO::File;
 
@@ -194,7 +194,7 @@ Someone can then use your class as follows:
 
 =over 4
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's modules for representing directed graphs,
 available from CPAN under modules/by-module/Graph/
@@ -204,25 +204,25 @@ available from CPAN under modules/by-module/Graph/
 The O'Reilly book has a chapter on directed graphs,
 which is based around Jarkko's modules.
 
-=item Graph::Writer::Dot
+=item L<Graph::Writer::Dot>
 
 A simple subclass of this class for writing graphs
 in the file format used by dot, which is part of the
 graphviz package from AT&T.
 
-=item Graph::Writer::VCG
+=item L<Graph::Writer::VCG>
 
 A simple subclass of this class for writing graphs
 in the file format used by VCG, a tool for visualising
 directed graphs, initially developed for visualising
 compiler graphs.
 
-=item Graph::Writer::XML
+=item L<Graph::Writer::XML>
 
 A simple subclass of this class for writing graphs
 as XML, using a simple graph markup.
 
-=item Graph::Reader
+=item L<Graph::Reader>
 
 A baseclass for Graph file format readers.
 

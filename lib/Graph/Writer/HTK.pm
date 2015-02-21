@@ -10,7 +10,7 @@ use warnings;
 #=======================================================================
 
 use parent 'Graph::Writer';
-our $VERSION = '2.06';
+our $VERSION = '2.07';
 
 my @graph_attributes = qw(base lmname lmscale wdpenalty);
 
@@ -131,19 +131,19 @@ Graph::Writer::HTK - write a perl Graph out as an HTK lattice file
 
 =over 4
 
-=item Graph
+=item L<Graph>
 
 Jarkko Hietaniemi's Graph class and others, used for representing
 and manipulating directed graphs. Available from CPAN.
 Also described / used in the chapter on directed graph algorithms
 in the B<Algorithms in Perl> book from O'Reilly.
 
-=item Graph::Writer
+=item L<Graph::Writer>
 
 The base-class for this module, which defines the public methods,
 and describes the ideas behind Graph reader and writer modules.
 
-=item Graph::Reader::HTK
+=item L<Graph::Reader::HTK>
 
 A class which will read a perl Graph from an HTK lattice file.
 
