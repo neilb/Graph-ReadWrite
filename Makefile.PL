@@ -15,7 +15,7 @@ if ($mm_ver =~ /_/) { # dev version
     DISTNAME     => 'Graph-ReadWrite',
     ABSTRACT     => 'Classes for reading and writing directed graphs',
     AUTHOR       => 'Neil Bowers <neil@bowers.com>',
-    VERSION      => '2.06',
+    VERSION      => '2.07',
     LICENSE      => 'perl',
 
     ($mm_ver <= 6.45

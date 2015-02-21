@@ -1,5 +1,10 @@
 package Graph::ReadWrite;
 
+use 5.006;
+use strict;
+use warnings;
+our $VERSION = '2.07';
+
 1;
 
 =head1 NAME
