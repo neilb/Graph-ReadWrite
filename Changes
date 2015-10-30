@@ -3,6 +3,8 @@ Revision history for perl distribution Graph-ReadWrite
 2.08 2015-10-30 NEILB
     - Switched to Dist::Zilla
     - Updated the github repo URL after changing my github username
+    - Removed a spurious =back from Graph::ReadWrite.
+      Thanks to Lucas Kanashiro for RT#106063
 
 2.07 2015-02-21 NEILB
     - Made mentions in SEE ALSO be links. MANWAR++ for starting this.

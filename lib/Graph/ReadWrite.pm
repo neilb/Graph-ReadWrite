@@ -20,8 +20,6 @@ modules for a specific format:
 
 =over 4
 
-=back
-
 =item * L<Graph::Reader::Dot> -
 class for reading a Graph instance from Dot format.
 
