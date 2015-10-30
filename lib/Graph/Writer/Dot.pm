@@ -3,11 +3,11 @@
 #
 package Graph::Writer::Dot;
 
+use 5.006;
 use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.07';
 
 #-----------------------------------------------------------------------
 # List of valid dot attributes for the entire graph, per node,
@@ -165,10 +165,10 @@ Graph::Writer::Dot - write out directed graph in Dot format
 
   use Graph;
   use Graph::Writer::Dot;
-    
+
   $graph = Graph->new();
   # add edges and nodes to the graph
-    
+
   $writer = Graph::Writer::Dot->new();
   $writer->write_graph($graph, 'mygraph.dot');
 
@@ -223,6 +223,10 @@ which is based around Jarkko's modules.
 The base-class for Graph::Writer::Dot
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

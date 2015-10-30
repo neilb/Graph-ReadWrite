@@ -3,10 +3,9 @@
 #
 package Graph::Reader;
 
+use 5.006;
 use strict;
 use warnings;
-
-our $VERSION = '2.07';
 
 use IO::File;
 use Graph;
@@ -94,11 +93,11 @@ Graph::Reader - base class for Graph file format readers
   use Graph::Reader;
   use vars qw(@ISA);
   @ISA = qw(Graph::Reader);
-    
+
   sub _read_graph
   {
     my ($self, $graph, $FILE) = @_;
-    
+
     # read $FILE and populate $graph
   }
 
@@ -143,7 +142,7 @@ DGF is a directed graph format - create a B<Graph::Reader::DGF> module,
 with the following structure:
 
   package Graph::Reader::DGF;
-  
+
   use Graph::Reader;
   use vars qw(@ISA);
   @ISA = qw(Graph::Reader);
@@ -153,14 +152,14 @@ with the following structure:
     my $self  = shift;
     my $graph = shift;
     my $FILE  = shift;
-        
+
     while (<$FILE>)
     {
     }
-  
+
     return 1;
   }
-    
+
   1;
 
 Note the leading underscore on the B<_read_graph()> method.
@@ -176,16 +175,16 @@ as follows:
   sub _init
   {
     my $self = shift;
-    
+
     $self->SUPER::_init();
-        
+
     # your initialisation here
   }
 
 Someone can then use your class as follows:
 
   use Graph::Reader::DGF;
-  
+
   $reader = Graph::Reader::DGF->new();
   $graph = $reader->read_graph('foo.dgf');
 
@@ -213,6 +212,10 @@ for directed graphs.
 A baseclass for Graph file format writers.
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

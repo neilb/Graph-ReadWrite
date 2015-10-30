@@ -3,13 +3,12 @@
 #
 package Graph::Reader::HTK;
 
+use 5.006;
 use strict;
 use warnings;
 
 use parent 'Graph::Reader';
 use Carp;
-
-our $VERSION = '2.06';
 
 my %node_attributes =
 (
@@ -199,11 +198,15 @@ Graph::Reader::HTK - read an HTK lattice in as an instance of Graph
 =head1 SYNOPSIS
 
   use Graph::Reader::HTK;
-  
+
   $reader = Graph::Reader::HTK->new;
   $graph = $reader->read_graph('mylattice.lat');
 
 =head1 DESCRIPTION
+
+This module can be used to read a directed graph in the
+L<HTK|http://htk.eng.cam.ac.uk> lattice
+format. It returns an instance of the L<Graph> class.
 
 =head1 SEE ALSO
 
@@ -225,7 +228,15 @@ and describes the ideas behind Graph reader and writer modules.
 
 A class which will write a perl Graph out as an HTK lattice.
 
+=item L<HTK|http://htk.eng.cam.ac.uk>
+
+The Hidden Markov Model Toolkit.
+
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

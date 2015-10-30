@@ -3,11 +3,11 @@
 #
 package Graph::Writer::VCG;
 
+use 5.006;
 use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.07';
 
 #-----------------------------------------------------------------------
 # Attribute type information
@@ -293,10 +293,10 @@ Graph::Writer::VCG - write out directed graph in VCG format
 
   use Graph;
   use Graph::Writer::VCG;
-  
+
   $graph = Graph->new();
   # add edges and nodes to the graph
-  
+
   $writer = Graph::Writer::VCG->new();
   $writer->write_graph($graph, 'mygraph.vcg');
 
@@ -373,6 +373,10 @@ which is based around Jarkko's modules.
 The base-class for Graph::Writer::VCG
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

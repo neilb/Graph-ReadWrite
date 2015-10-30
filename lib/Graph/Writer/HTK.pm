@@ -3,6 +3,7 @@
 #
 package Graph::Writer::HTK;
 
+use 5.006;
 use strict;
 use warnings;
 
@@ -10,7 +11,6 @@ use warnings;
 #=======================================================================
 
 use parent 'Graph::Writer';
-our $VERSION = '2.07';
 
 my @graph_attributes = qw(base lmname lmscale wdpenalty);
 
@@ -121,11 +121,15 @@ Graph::Writer::HTK - write a perl Graph out as an HTK lattice file
 =head1 SYNOPSIS
 
   use Graph::Writer::HTK;
-  
+
   $writer = Graph::Reader::HTK->new();
   $reader->write_graph($graph, 'mylattice.lat');
 
 =head1 DESCRIPTION
+
+This module will write a directed graph to a file
+in the L<HTK|http://htk.eng.cam.ac.uk> lattice format.
+The graph must be an instance of the L<Graph> class.
 
 =head1 SEE ALSO
 
@@ -148,6 +152,10 @@ and describes the ideas behind Graph reader and writer modules.
 A class which will read a perl Graph from an HTK lattice file.
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

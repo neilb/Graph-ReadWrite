@@ -3,6 +3,7 @@
 #
 package Graph::Reader::XML;
 
+use 5.006;
 use strict;
 use warnings;
 
@@ -10,7 +11,6 @@ use parent 'Graph::Reader';
 use Carp;
 use XML::Parser;
 
-our $VERSION = '2.06';
 
 #=======================================================================
 #
@@ -174,7 +174,7 @@ Graph::Reader::XML - class for reading a Graph instance from XML
 
   use Graph::Reader::XML;
   use Graph;
-  
+
   $reader = Graph::Reader::XML->new();
   $graph = $reader->read_graph('mygraph.xml');
 
@@ -232,6 +232,10 @@ Used to serialise a Graph instance as XML.
 Jarkko Hietaniemi's classes for representing directed graphs.
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

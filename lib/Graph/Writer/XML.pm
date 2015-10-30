@@ -3,13 +3,12 @@
 #
 package Graph::Writer::XML;
 
+use 5.006;
 use strict;
 use warnings;
 
 use parent 'Graph::Writer';
 use XML::Writer;
-
-our $VERSION = '2.07';
 
 
 #=======================================================================
@@ -132,10 +131,10 @@ Graph::Writer::XML - write out directed graph as XML
 
     use Graph;
     use Graph::Writer::XML;
-    
+
     $graph = Graph->new();
     # add edges and nodes to the graph
-    
+
     $writer = Graph::Writer::XML->new();
     $writer->write_graph($graph, 'mygraph.xml');
 
@@ -200,6 +199,10 @@ which is based around Jarkko's modules.
 The base-class for Graph::Writer::XML
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

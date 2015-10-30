@@ -958,9 +958,8 @@ sub _Lexer {
 }
 
 use Graph::Reader;
-use vars qw(@ISA $VERSION $UseNodeAttr $UseEdgeAttr);
+use vars qw(@ISA $UseNodeAttr $UseEdgeAttr);
 
-$VERSION = '2.06';
 @ISA = qw(Parse::Yapp::Driver Graph::Reader);	# this will override setting from yapp
 
 sub _init {
@@ -1004,7 +1003,7 @@ Graph::Reader::Dot - class for reading a Graph instance from Dot format
 
     use Graph::Reader::Dot;
     use Graph;
-    
+
     $reader = Graph::Reader::Dot->new();
     $graph = $reader->read_graph('mygraph.dot');
 

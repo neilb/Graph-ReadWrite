@@ -3,10 +3,9 @@
 #
 package Graph::Writer;
 
+use 5.006;
 use strict;
 use warnings;
-
-our $VERSION = '2.07';
 
 use IO::File;
 
@@ -95,11 +94,11 @@ Graph::Writer - base class for Graph file format writers
   use Graph::Writer;
   use vars qw(@ISA);
   @ISA = qw(Graph::Writer);
-    
+
   sub _write_graph
   {
     my ($self, $graph, $FILE) = @_;
-        
+
     # write $graph to $FILE
   }
 
@@ -144,7 +143,7 @@ DGF is a directed graph format - create a B<Graph::Writer::DGF> module,
 with the following structure:
 
   package Graph::Writer::DGF;
-    
+
   use Graph::Writer;
   use vars qw(@ISA);
   @ISA = qw(Graph::Writer);
@@ -154,14 +153,14 @@ with the following structure:
     my $self  = shift;
     my $graph = shift;
     my $FILE  = shift;
-        
+
     while (<$FILE>)
     {
     }
-        
+
     return 1;
   }
-    
+
   1;
 
 Note the leading underscore on the B<_write_graph()> method.
@@ -177,16 +176,16 @@ as follows:
   sub _init
   {
     my $self = shift;
-    
+
     $self->SUPER::_init();
-        
+
     # your initialisation here
   }
 
 Someone can then use your class as follows:
 
   use Graph::Writer::DGF;
-  
+
   $writer = Graph::Writer::DGF->new();
   $writer->write_graph($graph, 'foo.dgf');
 
@@ -227,6 +226,10 @@ as XML, using a simple graph markup.
 A baseclass for Graph file format readers.
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

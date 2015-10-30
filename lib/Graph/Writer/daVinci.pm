@@ -3,11 +3,11 @@
 #
 package Graph::Writer::daVinci;
 
+use 5.006;
 use strict;
 use warnings;
 
 use parent 'Graph::Writer';
-our $VERSION = '2.07';
 
 #-----------------------------------------------------------------------
 # List of valid daVinci attributes for the entire graph, per node,
@@ -182,10 +182,10 @@ Graph::Writer::daVinci - write out directed graph in daVinci format
 
   use Graph;
   use Graph::Writer::daVinci;
-    
+
   $graph = Graph->new();
   # add edges and nodes to the graph
-    
+
   $writer = Graph::Writer::daVinci->new();
   $writer->write_graph($graph, 'mygraph.davinci');
 
@@ -238,6 +238,10 @@ which is based around Jarkko's modules.
 The base-class for Graph::Writer::daVinci
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 

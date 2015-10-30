@@ -3,7 +3,6 @@ package Graph::ReadWrite;
 use 5.006;
 use strict;
 use warnings;
-our $VERSION = '2.07';
 
 1;
 
@@ -44,7 +43,7 @@ class for reading a Graph instance from Dot format.
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/Graph-ReadWrite>
+L<https://github.com/neilb/Graph-ReadWrite>
 
 =head1 AUTHOR
 
