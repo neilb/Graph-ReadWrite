@@ -53,8 +53,10 @@ my %valid_attributes =
 sub _init
 {
     my $self = shift;
+    my %param = @_;
 
     $self->SUPER::_init();
+    $self->{_cluster} = $param{cluster};
 }
 
 #=======================================================================
@@ -118,6 +120,29 @@ sub _write_graph
                               map { "$_=\"".$attrref->{$_}."\"" } @keys), "]";
         }
         print $FILE ";\n";
+    }
+
+    if ($self->{_cluster} && grep { $_ eq $self->{_cluster} } @{$valid_attributes{'node'}}) {
+        #-------------------------------------------------------------------
+        # Generate a list of subgraphs based on the attribute value.
+        #-------------------------------------------------------------------
+        print $FILE "\n  /* list of subgraphs */\n";
+        my %cluster = ();
+        foreach my $v (sort $graph->vertices) {
+            my $attrs = $graph->get_vertex_attributes($v);
+            next unless $attrs && $attrs->{$self->{_cluster}};
+            my $attr_value = $attrs->{$self->{_cluster}};
+            $cluster{$attr_value} = [] unless exists $cluster{$attr_value};
+            push @{ $cluster{$attr_value} }, $v;
+        }
+        foreach my $attr_value (sort keys %cluster) {
+            print $FILE "  subgraph \"cluster_$attr_value\" {\n";
+            print $FILE "    label = \"$attr_value\";\n";
+            foreach my $node (@{ $cluster{$attr_value} }) {
+                print $FILE "    node [label=\"$node\"] \"$node\";\n";
+            }
+            print $FILE "  }\n";
+        }
     }
 
     #-------------------------------------------------------------------
@@ -188,7 +213,12 @@ Constructor - generate a new writer instance.
 
   $writer = Graph::Writer::Dot->new();
 
-This doesn't take any arguments.
+This can take one optional argument that tell to cluster nodes in subgraphs
+by using the attribute passed as value. See:
+
+  $writer = Graph::Writer::Dot->new(cluster => 'group');
+
+It will group nodes that have the the same value in the 'group' attribute.
 
 =head2 write_graph()
 
