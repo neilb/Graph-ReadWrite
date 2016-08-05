@@ -1,5 +1,9 @@
 Revision history for perl distribution Graph-ReadWrite
 
+2.09 2016-08-05 NEILB
+    - Added the ability to cluster nodes in subgraphs when generating
+      Dot format output. PR from Joenio Costa++.
+
 2.08 2015-10-30 NEILB
     - Switched to Dist::Zilla
     - Updated the github repo URL after changing my github username
